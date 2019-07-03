@@ -116,8 +116,8 @@ int main()
 /* v --- LTD --- v
 DexVerify(
   And(
-    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
     Future(ExpectState({lines: [7], vars:[c], values:[1]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
     Future(ExpectState({lines: [7], vars:[c], values:[3]})),
     Future(ExpectState({lines: [7], vars:[c], values:[4]})),
     Future(ExpectState({lines: [7], vars:[c], values:[5]}))
@@ -169,7 +169,7 @@ DexVerify(
     Until(
       ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
       ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
-      ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]})
+      Future(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
     )
   )
 )
