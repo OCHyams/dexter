@@ -1,15 +1,5 @@
 # LTL-Like language for DExTer
-
-Operator precedence:
-```
-Not (`!`), Next (N)  
-Until (`U`)  
-And (`/\`), Or (`\/`)  
-```
-
-We expose the operators as functions, so the associativity doesn't matter. But,<br/>
-if we decide to change course and use infix operators: Binary operators are left<br/>
-associative and Temporal operators are right associative.
+## LTL (Linear Temporal Logic)
 
 The standard definition of LTL is as follows (modified from [this](https://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf) source):
 
@@ -28,9 +18,8 @@ Where:
 
 Usual boolean connectives can be derived:
 ```
-* !(p /\ q) == p \/ q   // (disjunciton): i.e. OR
-* !p \/ q == p --> q    // (implication): Easiest to think about this in
-                           terms of short circuiting bool expression.
+!(p /\ q) == p \/ q   // (disjunciton): i.e. OR
+!p \/ q == p --> q    // (implication):
 ```
 
 From the syntax, we define the following:
@@ -39,87 +28,152 @@ p \/ !p == True
 !True == False
 ```
 
-For dexter, we define it as:
+Further temporal operators can be derived:
 ```
-t ::= a  |  !t  |  Xp  |  p U p
-b ::= b /\ t |  t /\ b | !b
-p ::= t | b
+F p == true U p  // p will hold at some point in the Future.
 ```
+There are others, e.g. Weak(W) and Release(R) and more, but I haven't<br/>
+encountered a scenario in dexter where we need them yet. We may also remove the<br/>
+Next operator.
 
-Where `a` is a dexter command describing state and everything else uses the<br/>
-same definitions as above. This redefinition means that we don't have to worry<br/>
-about performing boolean operations on program state. This makes it easier to<br/>
-understand test failures but does make the "language" more difficult to write<br/>
-and and less expressive.
+Operator precedence:
+1. Unary operators
+2. Binary temporal
+3. Binary boolean
+---
 
-This gives us the following command hierarchy where 'public' commands are
-prefixed with 'Dex':
+## LTD (Linear Temporal Dexter commands)
+We expose the LTL operators as functions. This makes the formulae easy to parse<br> because the functions will map directly to python like the existing DexCommands.
+
+Associativity is still important for reasons outliend later. Temporal operators<br/>
+are right associative and boolean connectives are left associative. e.g.
+```
+p U true U q == p U (true U q) == p U ( F q )
+```
+This reads "q must hold at some point, and p must hold at some point prior".
+
+### LTD functors
 ```
 Proposition
-  Temporal(Proposition)
-    Command(Temporal)
-      DexCommandXX(Command)
-        args: list
-      DexCommandYY(Command)
-        args: list
-    TemporalNot(Temporal)
-      operand: Temporal
-    DexNext(Temporal)
-      operand: Proposition
-    DexUntil(Temporial)
-      lhs: Proposition
-      rhs: Proposition
+  // Atomic propositions
+  ExpectValues(Proposition)
+    vars: list
+    values: list
+  ExpectStack(Proposition)
+    frames: list
+  ExpectState(ExpectValues, ExpectStack)
 
-  Boolean(Proposition)
-    __BooleanBinaryLeft(Boolean)
-      lhs: Boolean
-      rhs: Temporal
-    __BooleanBinaryRight(Boolean)
-      lhs: Temporal
-      rhs: Boolean
-    BooleanBinary(Boolean)
-      union
-        __BooleanBinaryLeft,
-        __BooleanBinaryRight
-    DexNot(Boolean)
-      operand: Boolean
+  // Unary operators
+  Not(Proposition)
+    prop: Proposition
+  Next(Proposition)
+
+  // Binary boolean operators
+  BinaryBoolean(Proposition)
+    Or(BinaryBoolean)
+      list: Proposition
+    And(BinaryBoolean)
+      list: Proposition
+
+  // Binary temporal operators
+  BinaryTemporal(Proposition)
+    Until(BinaryTemporal)
+      list: Proposition
+```
+The binary operators all take a list argument. This is syntactic sugar for a<br/>
+chained sequence of operators. Operator associativity is important because<br/> is applies when resolving a chain like this.
+```
+Until(x, y, z) == Until(x, Until(y, z))
+```
+Which Reads "Z must hold at some point, until then y must hold, and until then<br/> x must hold."
+
+### Examples
+Dexter/FoldBranchToCommonDest/test.cpp
+```
+int g_a = 0;
+int run_loop();
+int do_something();
+
+static bool condition(int c)
+{
+  return c > 4; // DexWatch("c")
+}
+int main()
+{
+  int x = 0;
+  while (run_loop())
+  {
+    if (condition(++x))
+      break;
+    do_something();
+  }
+
+  return g_a;
+}
+
+// DexExpectWatchValue("c", "1", "2", "3", "4", "5", on_line=7)
+
+/* v --- LTD --- v
+DexVerify(
+  And(
+    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[1]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[3]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[4]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[5]}))
+  )
+)
+*/
+```
+debuginfo-tests/asan-blocks.c
+```
+void b();
+struct S {
+  int a[8];
+};
+
+int f(struct S s, unsigned i) {
+  // DEBUGGER: break 17
+  // DEBUGGER: r
+  // DEBUGGER: p s
+  // CHECK: a = ([0] = 0, [1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6, [7] = 7)
+  return s.a[i];
+}
+
+int main(int argc, const char **argv) {
+  struct S s = {{0, 1, 2, 3, 4, 5, 6, 7}};
+  if (f(s, 4) == 4) {
+    // DEBUGGER: break 27
+    // DEBUGGER: c
+    // DEBUGGER: p s
+    // CHECK: a = ([0] = 0, [1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6, [7] = 7)
+    b();
+  }
+  return 0;
+}
+
+void c() {}
+
+void b() {
+  // DEBUGGER: break 40
+  // DEBUGGER: c
+  // DEBUGGER: p x
+  // CHECK: 42
+  __block int x = 42;
+  c();
+}
+
+/* v --- LTD --- v
+DexVerify(
+  Future(
+    Until(
+      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
+      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
+      ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]})
+    )
+  )
+)
+*/
 ```
 
-[note] Still unsure on the whole "no composition" thing. If we say "DexState" __is__
-aggregation, then * wildcard operator is __kind__of__ like an "OR anything". But this feels
-flimsy. Can't AND literally translate to "all of these things must be true, independantly"
-without any aggregation/merging? Then we can even give good diagnostics at run-time
-"this expression can never be true, use "False()"...?
-
-[note] This doesn't actually work, e.g.
-```
-F(x) == true U x
-(p U q) /\ F(x) -types-> (t U t)[t] /\ t == t /\ t, apparently invalid.
-
-...and adding t /\ t to the b ::= def means you can have a /\ a, which is
-invalid.
-```
-
-
-[note] JM says ditching next is completely fine.
-
-
-[wip] Trying out another definition...
-```
-need to allow this:
-(p U q) /\ Xp -- having "binary expr can only work on temp operands", as below,
-doesn't work because
-
-t ::=  p U p | Xp 
-b ::=  a  |  !a  |  t /\ t
-```
-
-The follwing DexCommands are based on real or upcoming commands:  
-(list is a list of strings)  
-DexLine(vars: list, linenos: list)
-DexValue(vars: list, values: list) -- variables have specified values  
-DexCallStack(frames: list) -- call stack matches some pattern  
-DexType(vars: list, tyeps: list) -- variables have specified type  
-DexEval(expression: str) -- expression evaluates to specified value  
-DexState(...) -- explicit declaration of program state (call stack, locals, globals)  
-
+[todo] Show verbocity of Dexter/fibonacci with LTD :(
