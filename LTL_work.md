@@ -115,7 +115,7 @@ int main()
 
 /* v --- LTD --- v
 DexVerify(
-  And(
+  Until(
     Future(ExpectState({lines: [7], vars:[c], values:[1]})),
     Future(ExpectState({lines: [7], vars:[c], values:[2]})),
     Future(ExpectState({lines: [7], vars:[c], values:[3]})),
@@ -179,9 +179,16 @@ DexVerify(
 [todo] Show verbocity of Dexter/fibonacci with LTD :(
 
 There's room for syntactic sugar. Renaming operators or patterns of operators<br/>
-may be useful. For example, consider renaming Until(...) to Sequence(...) and<br/>
-using the formal name "Eventually" instead of the current name "Future". Now<br/>
-instead of:
+may be useful. Subject to future changes, I like these substitutions (remember<br/>
+that binary operator functions take a list of operands):
+```
+Until    -> Consecutively
+Future   -> Eventually // This is the formal name anyway...
+And      -> All
+Or       -> Any
+```
+
+Then instead of:
 ```
 DexVerify(
   Future(
@@ -197,7 +204,7 @@ we could write:
 ```
 DexVerify(
   Eventually(
-    Sequence(
+    Consecutively(
       ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
       ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
       Eventually(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
@@ -205,22 +212,24 @@ DexVerify(
   )
 )
 ```
-If we say that an And list of Futures is simply a SparesSequence, instead of:
+We can have composite sugar too. If we say that a list of propositions that are<br/>
+Eventually true, Consecutively, is a sequence then we can change this (which<br/>
+I've updated with the syntax proposed above):
 ```
 DexVerify(
-  And(
-    Future(ExpectState({lines: [7], vars:[c], values:[1]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[3]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[4]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[5]}))
+  Consecutively(
+    Eventually(ExpectState({lines: [7], vars:[c], values:[1]})),
+    Eventually(ExpectState({lines: [7], vars:[c], values:[2]})),
+    Eventually(ExpectState({lines: [7], vars:[c], values:[3]})),
+    Eventually(ExpectState({lines: [7], vars:[c], values:[4]})),
+    Eventually(ExpectState({lines: [7], vars:[c], values:[5]}))
   )
 )
 ```
-we could have:
+to this:
 ```
 DexVerify(
-  SparseSequence(
+  Sequentially(
     ExpectState({lines: [7], vars:[c], values:[1]}),
     ExpectState({lines: [7], vars:[c], values:[2]}),
     ExpectState({lines: [7], vars:[c], values:[3]}),
@@ -229,5 +238,3 @@ DexVerify(
   )
 )
 ```
-Which patterns get a shortand is likely subject how often they crop up<br/>
-converting the existing tests to LTD form.
