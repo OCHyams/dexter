@@ -177,3 +177,57 @@ DexVerify(
 ```
 
 [todo] Show verbocity of Dexter/fibonacci with LTD :(
+
+There's room for syntactic sugar. Renaming operators or patterns of operators<br/>
+may be useful. For example, consider renaming Until(...) to Sequence(...) and<br/>
+using the formal name "Eventually" instead of the current name "Future". Now<br/>
+instead of:
+```
+DexVerify(
+  Future(
+    Until(
+      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
+      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
+      Future(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
+    )
+  )
+)
+```
+we could write:
+```
+DexVerify(
+  Eventually(
+    Sequence(
+      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
+      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
+      Eventually(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
+    )
+  )
+)
+```
+If we say that an And list of Futures is simply a SparesSequence, instead of:
+```
+DexVerify(
+  And(
+    Future(ExpectState({lines: [7], vars:[c], values:[1]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[3]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[4]})),
+    Future(ExpectState({lines: [7], vars:[c], values:[5]}))
+  )
+)
+```
+we could have:
+```
+DexVerify(
+  SparseSequence(
+    ExpectState({lines: [7], vars:[c], values:[1]}),
+    ExpectState({lines: [7], vars:[c], values:[2]}),
+    ExpectState({lines: [7], vars:[c], values:[3]}),
+    ExpectState({lines: [7], vars:[c], values:[4]}),
+    ExpectState({lines: [7], vars:[c], values:[5]})
+  )
+)
+```
+Which patterns get a shortand is likely subject how often they crop up<br/>
+converting the existing tests to LTD form.
