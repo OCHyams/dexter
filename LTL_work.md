@@ -188,7 +188,7 @@ changes, I like these substitutions (remember that binary operator functions
 take a list of operands):
 ```
 Until    -> Consecutively
-Future   -> Eventually // This is the formal name anyway...
+Future   -> Eventually (This is the formal name anyway)
 And      -> All
 Or       -> Any
 ```
@@ -218,7 +218,7 @@ DexVerify(
 )
 ```
 We can have syntactic sugar too. If we say that a list of propositions that are
-**Eventually** true, **Consecutively**, are listed **Sequentially**, we can
+**Eventually** true, **Consecutively**, are listed **Sequentially** then we can
 change the following example (which I've updated with the syntax proposed above)
 from this:
 ```
