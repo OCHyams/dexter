@@ -32,8 +32,8 @@ Further temporal operators can be derived:
 ```
 F p == true U p  // p will hold at some point in the Future.
 ```
-There are others, e.g. Weak(W) and Release(R) and more, but I haven't<br/>
-encountered a scenario in dexter where we need them yet. We may also remove the<br/>
+There are others, e.g. Weak(W) and Release(R) and more, but I haven't
+encountered a scenario in dexter where we need them yet. We may also remove the
 Next operator.
 
 Operator precedence:
@@ -43,9 +43,10 @@ Operator precedence:
 ---
 
 ## LTD (Linear Temporal Dexter commands)
-We expose the LTL operators as functions. This makes the formulae easy to parse<br> because the functions will map directly to python like the existing DexCommands.
+We expose the LTL operators as functions. This makes the formulae easy to parse
+because the functions will map directly to python like the existing DexCommands.
 
-Associativity is still important for reasons outliend later. Temporal operators<br/>
+Associativity is still important for reasons outliend later. Temporal operators
 are right associative and boolean connectives are left associative. e.g.
 ```
 p U true U q == p U (true U q) == p U ( F q )
@@ -80,12 +81,14 @@ Proposition
     Until(BinaryTemporal)
       list: Proposition
 ```
-The binary operators all take a list argument. This is syntactic sugar for a<br/>
-chained sequence of operators. Operator associativity is important because<br/> is applies when resolving a chain like this.
+The binary operators all take a list argument. This is syntactic sugar for a
+chained sequence of operators. Operator associativity is important because is
+applies when resolving a chain like this.
 ```
 Until(x, y, z) == Until(x, Until(y, z))
 ```
-Which Reads "Z must hold at some point, until then y must hold, and until then<br/> x must hold."
+Which Reads "Z must hold at some point, until then y must hold, and until then x
+must hold."
 
 ### Examples
 Dexter/FoldBranchToCommonDest/test.cpp
@@ -178,9 +181,11 @@ DexVerify(
 
 [todo] Show verbocity of Dexter/fibonacci with LTD :(
 
-There's room for syntactic sugar. Renaming operators or patterns of operators<br/>
-may be useful. Subject to future changes, I like these substitutions (remember<br/>
-that binary operator functions take a list of operands):
+### LTD Suggestions
+
+Renaming operators or patterns of operators may be useful. Subject to future
+changes, I like these substitutions (remember that binary operator functions
+take a list of operands):
 ```
 Until    -> Consecutively
 Future   -> Eventually // This is the formal name anyway...
@@ -212,8 +217,8 @@ DexVerify(
   )
 )
 ```
-We can have composite sugar too. If we say that a list of propositions that are<br/>
-Eventually true, Consecutively, is a sequence then we can change this (which<br/>
+We can have composite sugar too. If we say that a list of propositions that are
+Eventually true, Consecutively, is a sequence then we can change this (which
 I've updated with the syntax proposed above):
 ```
 DexVerify(
