@@ -217,9 +217,10 @@ DexVerify(
   )
 )
 ```
-We can have composite sugar too. If we say that a list of propositions that are
-Eventually true, Consecutively, is a sequence then we can change this (which
-I've updated with the syntax proposed above):
+We can have syntactic sugar too. If we say that a list of propositions that are
+**Eventually** true, **Consecutively**, are listed **Sequentially**, we can
+change the following example (which I've updated with the syntax proposed above)
+from this:
 ```
 DexVerify(
   Consecutively(
