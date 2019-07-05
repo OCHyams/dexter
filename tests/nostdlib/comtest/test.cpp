@@ -1,8 +1,12 @@
 int main()
 {
-    return 127;
+    int a = 0;
+    int b = 2;
+    int c = 3;
+    int d = 4;
+    int e = 5;
 }
 
-// DexVerify(And(Not(True), Not(Expect('a', 5))))
+// DexVerify(Until(True, Expect('a', 2)))
 
 

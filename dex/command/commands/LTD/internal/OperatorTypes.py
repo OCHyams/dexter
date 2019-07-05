@@ -27,15 +27,8 @@ from dex.command.commands.LTD.internal.Proposition import Proposition, Boolean
 
 
 class UnaryOperator(Proposition):
-    #def __init__(self, operand: CommandBase):
-    #    self.operand = operand
-    #    super().__init__()
-
-    ## @@ For now inheriting from CommandBase, can't see a reason for
-    ## specialised LTDBase yet.
     ## @@ implement a nice __rep__
     ## @@ implement a nice __str__ which prints a tree-like pattern.
-    # v -- this might be better because we can give better errors -- v
     def __init__(self, *args):
         super().__init__()
         if len(args) != 1:
@@ -59,26 +52,26 @@ class UnaryOperator(Proposition):
 
 
 class BinaryOperator(Proposition):
-    #def __init__(self, lhs: CommandBase, rhs: CommandBase):
-    #    self.lhs = lhs
-    #    self.rhs = rhs
-    #    super().__init__()
-
     def __init__(self, *args):
         super().__init__()
         if len(args) != 2:
             raise TypeError('Expected exactly two args')
 
-        # this isn't the __best__ way to do this, fix up later @@
-        ## maybe just hoist up (super.__init__())
-        for arg in args:
-            if isinstance(arg, bool):
-                arg = Boolean(arg)
-            elif not isinstance(arg, Proposition):
-                raise TypeError('Unrecognised command {}'.format(arg))
-
         self.lhs = args[0]
         self.rhs = args[1]
+
+        if isinstance(self.lhs, bool):
+            self.lhs = Boolean(self.lhs)
+        elif not isinstance(self.lhs, Proposition):
+            raise TypeError('Unrecognised proposition {}'.format(self.operand))
+
+        if isinstance(self.rhs, bool):
+            self.rhs = Boolean(self.rhs)
+        elif not isinstance(self.rhs, Proposition):
+            raise TypeError('Unrecognised proposition {}'.format(self.operand))
+
+
+
 
 
     def eval(self, step: StepIR) -> bool:

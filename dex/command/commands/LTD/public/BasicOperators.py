@@ -31,7 +31,7 @@ class Not(UnaryOperator):
         super().__init__(*args)
 
     def eval(self, step: StepIR):
-        result = self.operand.eval()
+        result = self.operand.eval(step)
         if result is not None:
             result = not result
         return result
@@ -46,10 +46,10 @@ class And(BinaryOperator):
         super().__init__(*args)
 
     def eval(self, step: StepIR):
-        result = self.lhs.eval()
+        result = self.lhs.eval(step)
         if result is not None:
-            result = result and self.rhs.eval()
-        return rhs_result
+            result = result and self.rhs.eval(step)
+        return result
 
     def __str__(self):
         return super().__str__()
@@ -62,7 +62,7 @@ class Or(BinaryOperator):
     def eval(self, step: StepIR):
         result = self.lhs.eval()
         if result is not True:
-            result = self.rhs.eval()
+            result = self.rhs.eval(step)
         return result
 
     def __str__(self):
@@ -72,7 +72,7 @@ class Or(BinaryOperator):
 class Until(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
-        result: bool = None
+        self.result: bool = None
 
 ## @@ consider renaming to reduce confusion with CommandBase
     def eval(self, step: StepIR):
@@ -80,10 +80,10 @@ class Until(BinaryOperator):
         if self.result is not None:
             return self.result
 
-        lhs_result = self.lhs.eval()
+        lhs_result = self.lhs.eval(step)
         # rhs must hold in the future
         if lhs_result is True:
-            rhs_result = self.rhs.eval()
+            rhs_result = self.rhs.eval(step)
             # no obligation on rhs to hold now...
             if rhs_result is not False:
                 # ...but if it does, that's our result.
@@ -91,7 +91,7 @@ class Until(BinaryOperator):
                 self.result = rhs_result
         # rhs is obligated to hold now
         elif lhs_result is False:
-            self.result = self.rhs.eval()
+            self.result = self.rhs.eval(step)
 
         # Either we have a result OR rhs has returned None. If self.result is
         # None but lhs_result is not, it means that rhs is temporal which is

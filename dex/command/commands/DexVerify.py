@@ -33,11 +33,10 @@ class DexVerify(CommandBase):
             raise TypeError('Expected exactly one arg')
 
         self.model = args[0]
-        print(self)
 
     def eval(self, program: DextIR) -> bool:
         for step in program.steps:
-            result = model.eval(step)
+            result = self.model.eval(step)
             if result is not None:
                 break
 
