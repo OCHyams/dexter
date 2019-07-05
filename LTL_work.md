@@ -85,19 +85,26 @@ for a chained sequence of operators. Temporal binary operators cannot accept
 a list because it doesn't make sense for our use case (remember that binary
 temporal operators are right associative):
 
-Imagine that we want to verify your program produces the trace:
+Imagine that we want to verify your program produces one of these trace:
 ```
-1. p -- program is in state p
+1. p -- program has property p
 2. q -- etc
 3. r
+
+1. p q
+2. r
+
+1. p q r
 ```
 We want to verify that "p holds, then q holds, then after q holds, r holds" so
 you write `Until(p, q, r)` which is the same as `p U (q U r)` in infix notation.
 
 ```
-1. p | true U (q U r) -- q U r must hold eventually
+1. p | true U (q U r) -- q U r must hold when q does not
 2. q | false U (q U r) -- q U r must hold from here on
-3. r | false U (false U true) -- woohoo
+     | false U (true U r) -- r must hold when q does not
+3. r | false U (false U r) -- r must hold from here on
+	 | false U (false U true) -- woohoo
 ```
 So, what's the problem? Well, imagine that after running your program it
 produces this trace:
@@ -108,17 +115,22 @@ produces this trace:
 ```
 Then, working through the verification:
 ```
-1. p | true U (q U r) -- q U r must hold eventually
-2. q | false U (false U r) -- r must hold from here on
+1. p | true U (q U r) -- q U r must hold when q does not
+2. z | false U (q U r) -- q U r must hold from here on
+     | false U (false U r) -- r must hold from here on
 3. r | false U (false U true) -- woohoo - wait a minuete
 ```
-`Until(p, q, r)` seems intuitive but it is stating that you may, but not are not
-obligated, to move to `q` between `p` and `r`.
+`Until(p, q, r)` is untuitive: it is stating that you may, but not are not
+obliged, to see `q` between `p` and `r`.
 
-The correct model here is `p /\ (p U (q /\ (q U r)))`:
+The correct model to use here is:
 ```
-And(p, Until(p, And(q, Until(q, r))))
+p /\ (p U (q /\ (q U r))) == And(p, Until(p, And(q, Until(q, r))))
 ```
+
+[notes] come up with an abstraction for this pattern.
+
+Order(p, q) == And(p, Until(p, q))
 
 [todo] everything from here onwards needs to be reworked
 ### Examples
