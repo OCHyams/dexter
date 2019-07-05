@@ -32,7 +32,7 @@ import os
 
 from dex.command.CommandBase import CommandBase
 from dex.utils.Exceptions import CommandParseError
-
+from dex.command.commands.LTD import And, Or, Not, Until
 
 def _get_valid_commands():
     """Search the commands subdirectory for any classes which are subclasses of
@@ -63,12 +63,21 @@ def _get_valid_commands():
         _get_valid_commands.cached = commands
         return commands
 
+def get_LTD_commands():
+    return {
+        'And': And,
+        'Or': Or,
+        'Not': Not,
+        'Until': Until
+    }
 
 def get_command_object(commandIR):
     """Externally visible version of _safe_eval.  Only returns the Command
     object itself.
     """
     valid_commands = _get_valid_commands()
+    valid_commands.update(get_LTD_commands())
+
     # pylint: disable=eval-used
     command = eval(commandIR.raw_text, valid_commands)
     # pylint: enable=eval-used

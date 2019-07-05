@@ -118,7 +118,7 @@ Then, working through the verification:
 1. p | true U (q U r) -- q U r must hold when q does not
 2. z | false U (q U r) -- q U r must hold from here on
      | false U (false U r) -- r must hold from here on
-3. r | false U (false U true) -- woohoo - wait a minuete
+3. r | false U (false U true) -- woohoo - wait a minute
 ```
 `Until(p, q, r)` is untuitive: it is stating that you may, but not are not
 obliged, to see `q` between `p` and `r`.
