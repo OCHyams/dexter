@@ -21,16 +21,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.command.CommandBase import CommandBase
-from dex.command.commands.LTD.internal.BinaryOperator import BinaryOperator
-from dex.command.commands.LTD.internal.UnaryOperator import UnaryOperator
-from dex.dextIR.DextIR import DextIR
+from dex.dextIR import StepIR
+from dex.command.commands.LTD.internal.OperatorTypes import (
+    BinaryOperator, UnaryOperator
+)
 
 class Not(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self):
+    def eval(self, step: StepIR):
         result = self.operand.eval()
         if result is not None:
             result = not result
@@ -45,7 +45,7 @@ class And(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self):
+    def eval(self, step: StepIR):
         result = self.lhs.eval()
         if result is not None:
             result = result and self.rhs.eval()
@@ -59,7 +59,7 @@ class Or(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self):
+    def eval(self, step: StepIR):
         result = self.lhs.eval()
         if result is not True:
             result = self.rhs.eval()
@@ -74,7 +74,8 @@ class Until(BinaryOperator):
         super().__init__(*args)
         result: bool = None
 
-    def eval(self):
+## @@ consider renaming to reduce confusion with CommandBase
+    def eval(self, step: StepIR):
         # definitive result
         if self.result is not None:
             return self.result

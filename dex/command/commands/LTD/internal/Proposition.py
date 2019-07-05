@@ -21,39 +21,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.command.CommandBase import CommandBase
-from dex.command.commands.LTD.internal.Boolean import Boolean
+import abc
+from dex.dextIR import StepIR
 
-class UnaryOperator(CommandBase):
-    #def __init__(self, operand: CommandBase):
-    #    self.operand = operand
-    #    super().__init__()
+class Proposition:
+    @abc.abstractmethod
+    def eval(self, step: StepIR) -> bool:
+        pass
 
-    ## @@ For now inheriting from CommandBase, can't see a reason for
-    ## specialised LTDBase yet.
-    ## @@ implement a nice __rep__
-    ## @@ implement a nice __str__ which prints a tree-like pattern.
-    # v -- this might be better because we can give better errors -- v
+class Boolean(Proposition):
     def __init__(self, *args):
         super().__init__()
         if len(args) != 1:
             raise TypeError('Expected exactly one arg')
+        if not isinstance(args[0], bool):
+            raise TypeError('Boolean.__init__() requires bool arg')
 
-        self.operand = args[0]
+        self.value = args[0]
 
-        if isinstance(self.operand, str):
-            print("yikes")
-
-        # this isn't the __best__ way to do this, fix up later @@
-        if isinstance(self.operand, bool):
-            self.operand = Boolean(self.operand)
-
-        if not isinstance(self.operand, CommandBase):
-            raise TypeError('Unrecognised proposition {}'.format(self.operand))
-
-
-    def eval(self):
-        pass
+    def eval(self, step: StepIR) -> bool:
+        return self.value
 
     def __str__(self):
-        return "({} {})".format(self.__class__.__name__, self.operand)
+        return str(self.value)

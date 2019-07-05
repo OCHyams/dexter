@@ -24,6 +24,7 @@
 """
 
 from dex.command.CommandBase import CommandBase
+from dex.dextIR import DextIR, StepIR
 
 
 class DexVerify(CommandBase):
@@ -34,8 +35,14 @@ class DexVerify(CommandBase):
         self.model = args[0]
         print(self)
 
-    def eval(self) -> bool:
-        return model.eval()
+    def eval(self, program: DextIR) -> bool:
+        for step in program.steps:
+            result = model.eval(step)
+            if result is not None:
+                break
+
+        result = False if result is None else result
+        return result
 
     def __str__(self):
         return "{}(\n  {}\n)".format("DexVerify", self.model)
