@@ -47,8 +47,10 @@ class And(BinaryOperator):
 
     def eval(self, step: StepIR):
         result = self.lhs.eval(step)
+        print("And lhs is {}".format(result))
         if result is not None:
             result = result and self.rhs.eval(step)
+            print("And rhs is {}".format(result))
         return result
 
     def __str__(self):
@@ -78,12 +80,14 @@ class Until(BinaryOperator):
     def eval(self, step: StepIR):
         # definitive result
         if self.result is not None:
+            print("Until result is saved as {}".format(self.result))
             return self.result
 
         lhs_result = self.lhs.eval(step)
         # rhs must hold in the future
         if lhs_result is True:
             rhs_result = self.rhs.eval(step)
+            print("Until lhs True rhs {}".format(self.result))
             # no obligation on rhs to hold now...
             if rhs_result is not False:
                 # ...but if it does, that's our result.
@@ -92,6 +96,7 @@ class Until(BinaryOperator):
         # rhs is obligated to hold now
         elif lhs_result is False:
             self.result = self.rhs.eval(step)
+            print("Until lhs False rhs {}".format(self.result))
 
         # Either we have a result OR rhs has returned None. If self.result is
         # None but lhs_result is not, it means that rhs is temporal which is

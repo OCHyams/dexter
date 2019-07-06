@@ -1,12 +1,11 @@
 int main()
 {
     int a = 0;
-    int b = 2;
-    int c = 3;
-    int d = 4;
-    int e = 5;
+    a = 0;      //DexWatch('a')
+    a = 0;      //DexWatch('a')
+    a = 0;      //DexWatch('a')
+    a = 0;      //DexWatch('a')
+    return a;   //DexWatch('a')
 }
 
-// DexVerify(Until(True, Expect('a', 2)))
-
-
+// DexVerify(Henceforth(Expect('a', '0')))

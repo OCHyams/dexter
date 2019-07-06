@@ -37,10 +37,12 @@ class Expect(Proposition):
         self.value = args[1]
 
     def eval(self, step: StepIR):
-        print(step)
-        ## @@ implement
-        return True
-
+        for expr, watch in step.watches.items():
+            if self.var == expr:
+                print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
+                return self.value == watch.value
+        # Expression result not stored this frame
+        return False
 
     def __str__(self):
         return "Expect({} = {})\n".format(self.var, self.value)

@@ -32,7 +32,9 @@ import os
 
 from dex.command.CommandBase import CommandBase
 from dex.utils.Exceptions import CommandParseError
-from dex.command.commands.LTD import And, Or, Not, Until, Expect
+from dex.command.commands.LTD import (
+    And, Or, Not, Until, Expect, Eventually, Henceforth
+)
 
 def _get_valid_commands():
     """Search the commands subdirectory for any classes which are subclasses of
@@ -72,6 +74,8 @@ def get_LTD_commands():
         'Not': Not,
         'Until': Until,
         'Expect': Expect,
+        'Eventually': Eventually,
+        'Henceforth': Henceforth,
     }
 
 def get_command_object(commandIR):

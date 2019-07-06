@@ -20,35 +20,34 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""@@ words
-"""
 
-from dex.command.CommandBase import CommandBase
-from dex.command.commands.LTD.internal.Proposition import Boolean
-from dex.dextIR import DextIR, StepIR
+from dex.dextIR import StepIR
+from dex.command.commands.LTD.internal.OperatorTypes import (
+    BinaryOperator, UnaryOperator
+)
+from dex.command.commands.LTD.public.BasicOperators import (
+    And, Or, Not, Until    
+)
 
-
-class DexVerify(CommandBase):
+class Eventually(UnaryOperator):
     def __init__(self, *args):
-        if len(args) != 1:
-            raise TypeError('Expected exactly one arg')
+        super().__init__(*args)
+        self.operand = Until(True, self.operand)
 
-        self.model = args[0]
-        if isinstance(self.model, bool):
-            self.model = Boolean(self.model)
-
-    def eval(self, program: DextIR) -> bool:
-        for step in program.steps:
-            # Skip over steps with no watches for this demo.@@
-            if len(step.watches) == 0:
-                continue
-            result = self.model.eval(step)
-            print("step result is {}".format(result))
-            if result is False:
-                break
-
-        result = False if result is None else result
-        return result
+    def eval(self, step: StepIR):
+        return self.operand.eval(step)
 
     def __str__(self):
-        return "{}(\n  {}\n)".format("DexVerify", self.model)
+        return super().__str__()
+
+
+class Henceforth(UnaryOperator):
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.operand = Not(Eventually(Not(self.operand)))
+
+    def eval(self, step: StepIR):
+        return self.operand.eval(step)
+
+    def __str__(self):
+        return super().__str__()
