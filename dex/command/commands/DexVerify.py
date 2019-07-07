@@ -25,7 +25,7 @@
 
 from dex.command.CommandBase import CommandBase
 from dex.command.commands.LTD.internal.Proposition import Boolean
-from dex.dextIR import DextIR, StepIR
+from dex.dextIR import DextIR, DextStepIter
 
 
 class DexVerify(CommandBase):
@@ -38,17 +38,11 @@ class DexVerify(CommandBase):
             self.model = Boolean(self.model)
 
     def eval(self, program: DextIR) -> bool:
-        for step in program.steps:
-            # Skip over steps with no watches for this demo.@@
-            if len(step.watches) == 0:
-                continue
-            result = self.model.eval(step)
-            print("step result is {}".format(result))
-            if result is False:
-                break
-
-        result = False if result is None else result
-        return result
+        program_itr = DextStepIter(program)
+        # @@ temp, skip to where we start watching variables
+        while len(program_itr.dextIR.steps[program_itr.next].watches) < 1:
+            program_itr.next += 1
+        return self.model.eval(program_itr)
 
     def __str__(self):
         return "{}(\n  {}\n)".format("DexVerify", self.model)

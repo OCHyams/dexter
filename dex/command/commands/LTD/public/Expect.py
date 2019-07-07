@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.dextIR import StepIR
+from dex.dextIR import DextStepIter, StepIR
 from dex.command.commands.LTD.internal.Proposition import Proposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
@@ -36,12 +36,14 @@ class Expect(Proposition):
         self.var = args[0]
         self.value = args[1]
 
-    def eval(self, step: StepIR):
-        for expr, watch in step.watches.items():
-            if self.var == expr:
-                print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
-                return self.value == watch.value
-        # Expression result not stored this frame
+    def eval(self, program: DextStepIter):
+        try:
+            for expr, watch in next(program).watches.items():
+                if self.var == expr:
+                    print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
+                    return self.value == watch.value
+        except StopIteration:
+            pass
         return False
 
     def __str__(self):

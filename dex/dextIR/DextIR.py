@@ -102,3 +102,24 @@ class DextIR:
 
     def clear_steps(self):
         self.steps.clear()
+
+
+# There's probaably a pythonic way to do this but for now just get it done...@@
+class DextStepIter:
+    def __init__(self, dextIR: DextIR, start = 0):
+        self.dextIR = dextIR
+        self.next = start
+
+    def __next__(self):
+        if self.next >= len(self.dextIR.steps):
+            raise StopIteration
+        step = self.dextIR.steps[self.next]
+        self.next += 1
+        return step
+
+    def __iter__(self):
+        self.next = 0
+        return self
+
+    def shallow_copy(self):
+        return DextStepIter(self.dextIR, self.next)

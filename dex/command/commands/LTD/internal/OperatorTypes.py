@@ -22,7 +22,7 @@
 # THE SOFTWARE.
 
 import abc
-from dex.dextIR import StepIR
+from dex.dextIR import DextStepIter
 from dex.command.commands.LTD.internal.Proposition import Proposition, Boolean
 
 
@@ -43,8 +43,7 @@ class UnaryOperator(Proposition):
         if not isinstance(self.operand, Proposition):
             raise TypeError('Unrecognised proposition {}'.format(self.operand))
 
-
-    def eval(self):
+    def eval(self, program: DextStepIter) -> bool:
         pass
 
     def __str__(self):
@@ -70,11 +69,7 @@ class BinaryOperator(Proposition):
         elif not isinstance(self.rhs, Proposition):
             raise TypeError('Unrecognised proposition {}'.format(self.operand))
 
-
-
-
-
-    def eval(self, step: StepIR) -> bool:
+    def eval(self, step: DextStepIter) -> bool:
         pass
 
     def __str__(self):

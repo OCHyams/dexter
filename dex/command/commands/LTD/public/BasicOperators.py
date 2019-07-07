@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.dextIR import StepIR
+from dex.dextIR import DextStepIter, StepIR
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
@@ -30,12 +30,10 @@ class Not(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, step: StepIR):
-        result = self.operand.eval(step)
-        if result is not None:
-            result = not result
+    def eval(self, program: DextStepIter):
+        result =  not self.operand.eval(program.shallow_copy())
+        print("Not -- {}".format(result))
         return result
-
 
     def __str__(self):
         return super().__str__()
@@ -45,13 +43,9 @@ class And(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, step: StepIR):
-        result = self.lhs.eval(step)
-        print("And lhs is {}".format(result))
-        if result is not None:
-            result = result and self.rhs.eval(step)
-            print("And rhs is {}".format(result))
-        return result
+    def eval(self, program: DextStepIter):
+        return (self.lhs.eval(program.shallow_copy())
+                and self.rhs.eval(program.shallow_copy()))
 
     def __str__(self):
         return super().__str__()
@@ -61,11 +55,9 @@ class Or(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, step: StepIR):
-        result = self.lhs.eval()
-        if result is not True:
-            result = self.rhs.eval(step)
-        return result
+    def eval(self, program: DextStepIter):
+        return (self.lhs.eval(program.shallow_copy())
+                or self.rhs.eval(program.shallow_copy()))
 
     def __str__(self):
         return super().__str__()
@@ -77,32 +69,16 @@ class Until(BinaryOperator):
         self.result: bool = None
 
 ## @@ consider renaming to reduce confusion with CommandBase
-    def eval(self, step: StepIR):
-        # definitive result
-        if self.result is not None:
-            print("Until result is saved as {}".format(self.result))
-            return self.result
-
-        lhs_result = self.lhs.eval(step)
-        # rhs must hold in the future
-        if lhs_result is True:
-            rhs_result = self.rhs.eval(step)
-            print("Until lhs True rhs {}".format(self.result))
-            # no obligation on rhs to hold now...
-            if rhs_result is not False:
-                # ...but if it does, that's our result.
-                # NOTE: rhs_result can be None
-                self.result = rhs_result
-        # rhs is obligated to hold now
-        elif lhs_result is False:
-            self.result = self.rhs.eval(step)
-            print("Until lhs False rhs {}".format(self.result))
-
-        # Either we have a result OR rhs has returned None. If self.result is
-        # None but lhs_result is not, it means that rhs is temporal which is
-        # syntactically ok but is semantically rubbish -- lhs just doesn't
-        # matter.
-        return self.result
+    def eval(self, program: DextStepIter):
+        for step in program:
+            result = self.rhs.eval(program.shallow_copy())
+            if result is False:
+                result = self.lhs.eval(program.shallow_copy())
+                print("Until -- {}".format(result))
+                return result
+            else:
+                print("Until -- True")
+                return True
 
     def __str__(self):
         return super().__str__()

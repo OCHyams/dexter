@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.dextIR import StepIR
+from dex.dextIR import DextStepIter, StepIR
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
@@ -34,8 +34,10 @@ class Eventually(UnaryOperator):
         super().__init__(*args)
         self.operand = Until(True, self.operand)
 
-    def eval(self, step: StepIR):
-        return self.operand.eval(step)
+    def eval(self, program: DextStepIter):
+        result = self.operand.eval(program.shallow_copy())
+        print("Eventually -- {}".format(result))
+        return result
 
     def __str__(self):
         return super().__str__()
@@ -46,8 +48,10 @@ class Henceforth(UnaryOperator):
         super().__init__(*args)
         self.operand = Not(Eventually(Not(self.operand)))
 
-    def eval(self, step: StepIR):
-        return self.operand.eval(step)
+    def eval(self, program: DextStepIter):
+        result = self.operand.eval(program.shallow_copy())
+        print("Henceforth -- {}".format(result))
+        return result
 
     def __str__(self):
         return super().__str__()

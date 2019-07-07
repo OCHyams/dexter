@@ -22,12 +22,13 @@
 # THE SOFTWARE.
 
 import abc
-from dex.dextIR import StepIR
+from dex.dextIR import DextStepIter
 
 class Proposition:
     @abc.abstractmethod
-    def eval(self, step: StepIR) -> bool:
+    def eval(self, step: DextStepIter) -> bool:
         pass
+
 
 class Boolean(Proposition):
     def __init__(self, *args):
@@ -39,8 +40,10 @@ class Boolean(Proposition):
 
         self.value = args[0]
 
-    def eval(self, step: StepIR) -> bool:
+    def eval(self, step: DextStepIter) -> bool:
         return self.value
 
     def __str__(self):
         return str(self.value)
+
+
