@@ -104,33 +104,30 @@ class DextIR:
         self.steps.clear()
 
 
-# There's probaably a pythonic way to do this but for now just get it done...@@
 class DextStepIter:
     def __init__(self, dextIR: DextIR, start = 0):
         self.dextIR = dextIR
-        self.next = start
-        self.this = start # this doesn't reaaally make sense :)
+        self.current = start
+        self._skip_empty_watches()
 
-    def __next__(self):
-        # @@ temp, skip over steps with no watches
-        while (self.next < len(self.dextIR.steps)
-            and len(self.dextIR.steps[self.next].watches) < 1):
-            self.next += 1
-
-        if self.next >= len(self.dextIR.steps):
-            raise StopIteration
-
-        step = self.dextIR.steps[self.next]
+    def dereference(self):
         import pprint
-        pprint.pprint("step[{}].watches: {}".format(self.next -1, step.watches))
-        self.this = self.next
-        self.next += 1
-        return step
+        pprint.pprint("step[{}].watches: {}".format(self.current, self.dextIR.steps[self.current].watches))
+        return self.dextIR.steps[self.current]
 
-    def __iter__(self):
-        print("Call __itr__ {} next is {}".format(self, self.next))
-        #self.next = 0
-        return self
+    def at_end(self) -> bool:
+        return self.current >= len(self.dextIR.steps)
+
+    def increment(self) -> bool:
+        self._skip_empty_watches()
+        self.current += 1
+        return not self.at_end()
 
     def shallow_copy(self):
-        return DextStepIter(self.dextIR, self.this)
+        return DextStepIter(self.dextIR, self.current)
+
+    # @@ temp, skip over steps with no watches
+    def _skip_empty_watches(self):
+        while (self.current < len(self.dextIR.steps)
+            and len(self.dextIR.steps[self.current].watches) < 1):
+            self.current += 1

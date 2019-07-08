@@ -87,7 +87,7 @@ class Weak(BinaryOperator):
 
     def eval(self, program: DextStepIter):
         print("v--- {} ---v".format(self))
-        for step in program:
+        while not program.at_end():
             print("v--- Weak step ---v")
             result = self.rhs.eval(program.shallow_copy())
             print("Weak rhs -- {}".format(result))
@@ -101,6 +101,8 @@ class Weak(BinaryOperator):
                     print("^--- Weak step (lhs False) ---^")
                     return False
             print("^--- Weak step ---^")
+            program.increment()
+
         print("^--- Weak (ret False)---^")
         return True
 
@@ -118,7 +120,8 @@ class Until(BinaryOperator):
 ## @@ consider renaming to reduce confusion with CommandBase
     def eval(self, program: DextStepIter):
         print("v--- {} ---v".format(self))
-        for step in program:
+
+        while not program.at_end():
             print("v--- Until step ---v")
             result = self.rhs.eval(program.shallow_copy())
             print("Until rhs -- {}".format(result))
@@ -132,6 +135,8 @@ class Until(BinaryOperator):
                     print("^--- Until step (lhs False)---^")
                     return False
             print("^--- Until step ---^")
+            program.increment()
+
         print("^--- Until (ret False)---^")
         return False
 

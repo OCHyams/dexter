@@ -37,7 +37,7 @@ class Expect(AtomicProposition):
         self.value = args[1]
 
     def eval(self, program: DextStepIter):
-        for expr, watch in program.dextIR.steps[program.this].watches.items():
+        for expr, watch in program.dereference().watches.items():
             if self.var == expr:
                 print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
                 return self.value == watch.value
