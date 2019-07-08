@@ -31,8 +31,6 @@ from dex.command.commands.LTD.internal.OperatorTypes import (
 class Not(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
-        if not isinstance(self.operand, AtomicProposition):
-            raise TypeError('Not can only be used on atomic propositions')
 
     def eval(self, program: DextStepIter):
         print("v--- Not ---v")

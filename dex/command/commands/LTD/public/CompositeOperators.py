@@ -70,9 +70,6 @@ class Henceforth(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
         self.operand = Release(False, self.operand)
-#    def __init__(self, *args):
-#        super().__init__(*args)
-#        self.operand = Not(Eventually(Not(self.operand)))
 
     def eval(self, program: DextStepIter):
         print("v--- {} ---v".format(self))
