@@ -1,6 +1,91 @@
-# LTL-Like language for DExTer
-## LTL (Linear Temporal Logic)
+# DexVerify
+## Contents
+1. Introduction
+2. Motivation
+3. Theory
+4. Quick reference
 
+## 1. Introduction
+A DexVerify command takes the form `DexVerify(p: Proposition)`. It will verify
+that the proposition `p` is true. The most basic proposition, an atomic
+proposition, expresses the expected state of the program at a given point in
+time, or `True` or `False`.
+
+For example, if you wanted to verify that at a given point in time the variable
+`a` is equal to `5`, you may write (1):
+```
+DexVerify(Expect('a', '5'))
+```
+
+In this example, it just so happens that the "given point in time" is the first
+step that the debugger takes (2). This is not a very useful verification
+because we could be stepping through pre-main startup code.
+
+If you want to check that eventually a local variable `a` is `5` you'd write:
+```
+DexVerify(Eventually(Expect('a', '5')))
+```
+
+You can try this yourself (3, 4):
+```
+somewhere/dexter/examples/intro_0
+$ cat test.cpp
+int main()
+{
+    for (int a = 0; a < 10; ++i)
+        ;
+    return 0;
+}
+
+somewhere/dexter/examples/intro_0
+$ cd ../../
+
+somewhere/dexter
+$ python dexter.py test --builder clang --debugger lldb --cflags "-O0 -g" -- examples/intro_0
+intro_0: 1.000
+```
+
+`Eventually` is a temporal operator. **Temporal** operators work over **time**.
+This one is easy to work with. simply, `Eventually(p)` means that p must become
+true at some point during program execution.
+
+`Eventually(p)` is defined as `Until(True, p)` (see the
+[source](dex/command/commands/LTD/public/CompositeOperators.py)).
+It's easy to explain how this works if we take a look at `Until(p, q)`.
+`Until` and `Weak` (see the Quick reference) are used to define all other
+temporal operators. All operators are exposed as functions so the formulae
+read in Polish, or 'prefix', notation.
+
+`Until(p, q)` means that `q` must hold in the future, and **until** then `p`
+must hold.
+
+Looking at `Eventually(p)` again then; `Until(True, p)` can be translated to
+"`p` must hold in the future, and until then, `True` must hold". `True` *is*
+always `True` so you could instead just say "`p` must hold in the future".
+
+Temporal operators are very useful but are not a catch-all solution. What if
+you want to say eventually `a == 5` and eventually `b == 1`? It's pretty much
+as easy as writing that. This is where boolean connectives come in:
+```
+DexVerify(And(Eventually(Expect('a', '5')), Eventually(Expect('b', '1'))))
+```
+
+This formula doesn't impose any ordering on the `Expect` propositions.
+If you want to say that `b == 1` at some point in the future *after*
+`a == 5` you'd write:
+```
+DexVerify(Eventually(And(Expect('a', 5), Eventually(Expect('b', 1)))))
+```
+
+
+## Motivation
+
+We needed a better way to represent the changes in program state.
+@@TODO Write more about why we chose LTL and talk about regex
+
+
+## Thoery
+The DexVerify command formulae are based on Linear Temporal Logic (LTL).
 The standard definition of LTL is as follows (modified from [this](https://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf) source):
 
 ```
@@ -10,7 +95,7 @@ p ::= a  |  p /\ p  |  !p  |  Xp |  p U p
 Where:
 * `a` is an atomic proposition
 * `p` represents a valid LTL formula
-* `X` denotes the ”next” operator
+* `X` denotes the ”next” operator (5)
 * `U` denotes the ”until” operator
 * `!` denotes negation
 * `/\` denotes logical "and"
@@ -32,9 +117,7 @@ Further temporal operators can be derived:
 ```
 F p == true U p  // p will hold at some point in the Future.
 ```
-There are others, e.g. Weak(W) and Release(R) and more, but I haven't
-encountered a scenario in dexter where we need them yet. We may also remove the
-Next operator.
+There are others, e.g. Weak(W) and Release(R) and more.
 
 Operator precedence:
 1. Unary operators
@@ -134,95 +217,7 @@ Order(p, q) == And(p, Until(p, q))
 
 [todo] everything from here onwards needs to be reworked
 ### Examples
-Dexter/FoldBranchToCommonDest/test.cpp
-```
-int g_a = 0;
-int run_loop();
-int do_something();
-
-static bool condition(int c)
-{
-  return c > 4; // DexWatch("c")
-}
-int main()
-{
-  int x = 0;
-  while (run_loop())
-  {
-    if (condition(++x))
-      break;
-    do_something();
-  }
-
-  return g_a;
-}
-
-// DexExpectWatchValue("c", "1", "2", "3", "4", "5", on_line=7)
-
-/* v --- LTD --- v
-DexVerify(
-  Until(
-    Future(ExpectState({lines: [7], vars:[c], values:[1]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[2]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[3]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[4]})),
-    Future(ExpectState({lines: [7], vars:[c], values:[5]}))
-  )
-)
-*/
-```
-debuginfo-tests/asan-blocks.c
-```
-void b();
-struct S {
-  int a[8];
-};
-
-int f(struct S s, unsigned i) {
-  // DEBUGGER: break 17
-  // DEBUGGER: r
-  // DEBUGGER: p s
-  // CHECK: a = ([0] = 0, [1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6, [7] = 7)
-  return s.a[i];
-}
-
-int main(int argc, const char **argv) {
-  struct S s = {{0, 1, 2, 3, 4, 5, 6, 7}};
-  if (f(s, 4) == 4) {
-    // DEBUGGER: break 27
-    // DEBUGGER: c
-    // DEBUGGER: p s
-    // CHECK: a = ([0] = 0, [1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6, [7] = 7)
-    b();
-  }
-  return 0;
-}
-
-void c() {}
-
-void b() {
-  // DEBUGGER: break 40
-  // DEBUGGER: c
-  // DEBUGGER: p x
-  // CHECK: 42
-  __block int x = 42;
-  c();
-}
-
-/* v --- LTD --- v
-DexVerify(
-  Future(
-    Until(
-      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
-      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
-      Future(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
-    )
-  )
-)
-*/
-```
-
-[todo] Show verbocity of Dexter/fibonacci with LTD :(
+[todo] Redo examples
 
 ### LTD Suggestions
 
@@ -287,3 +282,9 @@ DexVerify(
   )
 )
 ```
+### @@ TODO/notes
+1. The Expect syntax will not look anything like this.
+2. Makes sense for the first step to be stepping into main -- discuss with team.
+3. Create this examples directory
+4. maybe just reference the example and don't show it all here
+5. note - may remove Next operator from dexter
