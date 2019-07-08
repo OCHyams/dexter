@@ -22,13 +22,13 @@
 # THE SOFTWARE.
 
 from dex.dextIR import DextStepIter, StepIR
-from dex.command.commands.LTD.internal.Proposition import AtomicProposition
+from dex.command.commands.LTD.internal.Proposition import Proposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
 
 ## @@ this is just here to test out LTD :)
-class Expect(AtomicProposition):
+class Expect(Proposition):
     def __init__(self, *args):
         if len(args) != 2:
             raise TypeError('expected exactly two args')

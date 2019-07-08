@@ -24,7 +24,6 @@
 from copy import copy
 
 from dex.dextIR import DextStepIter, StepIR
-from dex.command.commands.LTD.internal.Proposition import AtomicProposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )

@@ -26,15 +26,11 @@ from dex.dextIR import DextStepIter
 
 class Proposition:
     @abc.abstractmethod
-    def eval(self, step: DextStepIter) -> bool:
+    def eval(self, trace_iter: DextStepIter) -> bool:
         pass
 
 
-class AtomicProposition(Proposition):
-    pass
-
-
-class Boolean(AtomicProposition):
+class Boolean(Proposition):
     def __init__(self, *args):
         super().__init__()
         if len(args) != 1:
@@ -44,7 +40,7 @@ class Boolean(AtomicProposition):
 
         self.value = args[0]
 
-    def eval(self, step: DextStepIter) -> bool:
+    def eval(self, trace_iter: DextStepIter) -> bool:
         return self.value
 
     def __str__(self):
