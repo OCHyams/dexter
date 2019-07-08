@@ -109,17 +109,28 @@ class DextStepIter:
     def __init__(self, dextIR: DextIR, start = 0):
         self.dextIR = dextIR
         self.next = start
+        self.this = start # this doesn't reaaally make sense :)
 
     def __next__(self):
+        # @@ temp, skip over steps with no watches
+        while (self.next < len(self.dextIR.steps)
+            and len(self.dextIR.steps[self.next].watches) < 1):
+            self.next += 1
+
         if self.next >= len(self.dextIR.steps):
             raise StopIteration
+
         step = self.dextIR.steps[self.next]
+        import pprint
+        pprint.pprint("step[{}].watches: {}".format(self.next -1, step.watches))
+        self.this = self.next
         self.next += 1
         return step
 
     def __iter__(self):
-        self.next = 0
+        print("Call __itr__ {} next is {}".format(self, self.next))
+        #self.next = 0
         return self
 
     def shallow_copy(self):
-        return DextStepIter(self.dextIR, self.next)
+        return DextStepIter(self.dextIR, self.this)

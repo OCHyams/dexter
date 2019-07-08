@@ -22,13 +22,13 @@
 # THE SOFTWARE.
 
 from dex.dextIR import DextStepIter, StepIR
-from dex.command.commands.LTD.internal.Proposition import Proposition
+from dex.command.commands.LTD.internal.Proposition import AtomicProposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
 
 ## @@ this is just here to test out LTD :)
-class Expect(Proposition):
+class Expect(AtomicProposition):
     def __init__(self, *args):
         if len(args) != 2:
             raise TypeError('expected exactly two args')
@@ -37,14 +37,14 @@ class Expect(Proposition):
         self.value = args[1]
 
     def eval(self, program: DextStepIter):
-        try:
-            for expr, watch in next(program).watches.items():
-                if self.var == expr:
-                    print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
-                    return self.value == watch.value
-        except StopIteration:
-            pass
+        for expr, watch in program.dextIR.steps[program.this].watches.items():
+            if self.var == expr:
+                print("Expect({} == {}) and got {} == {}".format(self.var, self.value, expr, watch.value))
+                return self.value == watch.value
         return False
 
     def __str__(self):
-        return "Expect({} = {})\n".format(self.var, self.value)
+        return "Expect({} = {})".format(self.var, self.value)
+
+    def __repr__(self):
+        return self.__str__()

@@ -47,7 +47,7 @@ class UnaryOperator(Proposition):
         pass
 
     def __str__(self):
-        return "({} {})".format(self.__class__.__name__, self.operand)
+        return "{}({})".format(self.__class__.__name__, self.operand)
 
 
 class BinaryOperator(Proposition):
@@ -73,4 +73,4 @@ class BinaryOperator(Proposition):
         pass
 
     def __str__(self):
-        return "({} {} {})".format(self.lhs, self.__class__.__name__, self.rhs)
+        return "{}({}, {})".format(self.__class__.__name__, self.lhs, self.rhs)

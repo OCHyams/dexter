@@ -22,20 +22,28 @@
 # THE SOFTWARE.
 
 from dex.dextIR import DextStepIter, StepIR
+from dex.command.commands.LTD.internal.Proposition import AtomicProposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
 
+
 class Not(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
+        if not isinstance(self.operand, AtomicProposition):
+            raise TypeError('Not can only be used on atomic propositions')
 
     def eval(self, program: DextStepIter):
+        print("v--- Not ---v")
         result =  not self.operand.eval(program.shallow_copy())
-        print("Not -- {}".format(result))
+        print("^--- Not (ret {}) ---^".format(result))
         return result
 
     def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
         return super().__str__()
 
 
@@ -44,10 +52,17 @@ class And(BinaryOperator):
         super().__init__(*args)
 
     def eval(self, program: DextStepIter):
-        return (self.lhs.eval(program.shallow_copy())
+        print("v--- And ---v")
+        result = (self.lhs.eval(program.shallow_copy())
                 and self.rhs.eval(program.shallow_copy()))
+        print("^--- And (ret {}) ---^".format(result))
+        return result
+
 
     def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
         return super().__str__()
 
 
@@ -62,23 +77,68 @@ class Or(BinaryOperator):
     def __str__(self):
         return super().__str__()
 
+def __repr__(self):
+        return super().__str__()
+
+
+class Weak(BinaryOperator):
+    """ Weak(p, q) == p must hold until q and q may never hold
+    """
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def eval(self, program: DextStepIter):
+        print("v--- {} ---v".format(self))
+        for step in program:
+            print("v--- Weak step ---v")
+            result = self.rhs.eval(program.shallow_copy())
+            print("Weak rhs -- {}".format(result))
+            if result is True:
+                print("^--- Weak step (rhs True) ---^")
+                return True
+            else:
+                result = self.lhs.eval(program.shallow_copy())
+                print("Weak lhs -- {}".format(result))
+                if result is False:
+                    print("^--- Weak step (lhs False) ---^")
+                    return False
+            print("^--- Weak step ---^")
+        print("^--- Weak (ret False)---^")
+        return True
+
+    def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
+        return super().__str__()
+
 
 class Until(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
-        self.result: bool = None
 
 ## @@ consider renaming to reduce confusion with CommandBase
     def eval(self, program: DextStepIter):
+        print("v--- {} ---v".format(self))
         for step in program:
+            print("v--- Until step ---v")
             result = self.rhs.eval(program.shallow_copy())
-            if result is False:
-                result = self.lhs.eval(program.shallow_copy())
-                print("Until -- {}".format(result))
-                return result
-            else:
-                print("Until -- True")
+            print("Until rhs -- {}".format(result))
+            if result is True:
+                print("^--- Until step (rhs {})---^".format(result))
                 return True
+            else:
+                result = self.lhs.eval(program.shallow_copy())
+                print("Until lhs -- {}".format(result))
+                if result is False:
+                    print("^--- Until step (lhs False)---^")
+                    return False
+            print("^--- Until step ---^")
+        print("^--- Until (ret False)---^")
+        return False
 
     def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
         return super().__str__()

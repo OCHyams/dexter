@@ -30,7 +30,11 @@ class Proposition:
         pass
 
 
-class Boolean(Proposition):
+class AtomicProposition(Proposition):
+    pass
+
+
+class Boolean(AtomicProposition):
     def __init__(self, *args):
         super().__init__()
         if len(args) != 1:

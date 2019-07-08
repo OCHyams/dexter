@@ -22,6 +22,7 @@
 # THE SOFTWARE.
 """@@ words
 """
+import pprint
 
 from dex.command.CommandBase import CommandBase
 from dex.command.commands.LTD.internal.Proposition import Boolean
@@ -39,10 +40,10 @@ class DexVerify(CommandBase):
 
     def eval(self, program: DextIR) -> bool:
         program_itr = DextStepIter(program)
-        # @@ temp, skip to where we start watching variables
-        while len(program_itr.dextIR.steps[program_itr.next].watches) < 1:
-            program_itr.next += 1
         return self.model.eval(program_itr)
 
     def __str__(self):
-        return "{}(\n  {}\n)".format("DexVerify", self.model)
+        return "DexVerify({})".format(self.model)
+
+    def __repr__(self):
+        return self.__str__()

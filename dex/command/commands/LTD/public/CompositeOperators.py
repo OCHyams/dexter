@@ -26,7 +26,7 @@ from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
 )
 from dex.command.commands.LTD.public.BasicOperators import (
-    And, Or, Not, Until    
+    And, Or, Not, Until, Weak
 )
 
 class Eventually(UnaryOperator):
@@ -35,23 +35,53 @@ class Eventually(UnaryOperator):
         self.operand = Until(True, self.operand)
 
     def eval(self, program: DextStepIter):
+        print("v--- {} ---v".format(self))
         result = self.operand.eval(program.shallow_copy())
-        print("Eventually -- {}".format(result))
+        print("^--- Eventually {} ---^".format(result))
         return result
 
     def __str__(self):
-        return super().__str__()
+        return "{} is {}".format(self.__class__.__name__, self.operand.__str__())
+
+    def __repr__(self):
+        return self.__str__()
+
+
+
+class Release(BinaryOperator):
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.operand = Weak(self.rhs, And(self.rhs, self.lhs))
+
+    def eval(self, program: DextStepIter):
+        print("v--- {} ---v".format(self))
+        result = self.operand.eval(program.shallow_copy())
+        print("^--- Release {} ---^".format(result))
+        return result
+
+    def __str__(self):
+        return "{} is {}".format(self.__class__.__name__, self.operand.__str__())
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Henceforth(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
-        self.operand = Not(Eventually(Not(self.operand)))
+        self.operand = Release(False, self.operand)
+#    def __init__(self, *args):
+#        super().__init__(*args)
+#        self.operand = Not(Eventually(Not(self.operand)))
 
     def eval(self, program: DextStepIter):
+        print("v--- {} ---v".format(self))
         result = self.operand.eval(program.shallow_copy())
-        print("Henceforth -- {}".format(result))
+        print("^--- {} ---^".format(result))
         return result
 
     def __str__(self):
-        return super().__str__()
+        return "{} is {}".format(self.__class__.__name__, self.operand.__str__())
+
+    def __repr__(self):
+        return self.__str__()

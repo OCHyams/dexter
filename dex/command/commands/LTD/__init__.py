@@ -6,6 +6,7 @@ from dex.command.commands.LTD.public.BasicOperators import And
 from dex.command.commands.LTD.public.BasicOperators import Or
 ## Temporal operators
 from dex.command.commands.LTD.public.BasicOperators import Until
+from dex.command.commands.LTD.public.BasicOperators import Weak
 ## Atomic propositions
 from dex.command.commands.LTD.public.Expect import Expect
 
