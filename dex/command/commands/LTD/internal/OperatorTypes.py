@@ -43,7 +43,7 @@ class UnaryOperator(Proposition):
         if not isinstance(self.operand, Proposition):
             raise TypeError('Unrecognised proposition {}'.format(self.operand))
 
-    def eval(self, program: DextStepIter) -> bool:
+    def eval(self, trace_iter: DextStepIter) -> bool:
         pass
 
     def __str__(self):

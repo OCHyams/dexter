@@ -34,9 +34,9 @@ class Eventually(UnaryOperator):
         super().__init__(*args)
         self.operand = Until(True, self.operand)
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
-        result = self.operand.eval(program.shallow_copy())
+        result = self.operand.eval(trace_iter)
         print("^--- Eventually {} ---^".format(result))
         return result
 
@@ -53,9 +53,9 @@ class Release(BinaryOperator):
         super().__init__(*args)
         self.operand = Weak(self.rhs, And(self.rhs, self.lhs))
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
-        result = self.operand.eval(program.shallow_copy())
+        result = self.operand.eval(trace_iter)
         print("^--- Release {} ---^".format(result))
         return result
 
@@ -71,9 +71,9 @@ class Henceforth(UnaryOperator):
         super().__init__(*args)
         self.operand = Release(False, self.operand)
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
-        result = self.operand.eval(program.shallow_copy())
+        result = self.operand.eval(trace_iter)
         print("^--- {} ---^".format(result))
         return result
 

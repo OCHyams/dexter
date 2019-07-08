@@ -22,6 +22,7 @@
 # THE SOFTWARE.
 """Root for dextIR serialization types."""
 
+import pprint
 from collections import OrderedDict
 from typing import List
 
@@ -105,25 +106,34 @@ class DextIR:
 
 
 class DextStepIter:
+    """Wrapper around DextIR to iterate over the program steps.
+    This iterator is shallow copyable.
+    """
+
     def __init__(self, dextIR: DextIR, start = 0):
         self.dextIR = dextIR
         self.current = start
         self._skip_empty_watches()
 
-    def dereference(self):
-        import pprint
-        pprint.pprint("step[{}].watches: {}".format(self.current, self.dextIR.steps[self.current].watches))
-        return self.dextIR.steps[self.current]
+    def dereference(self) -> StepIR:
+        """Dereference the iterator.
+        """
+        step = self.dextIR.steps[self.current]
+        pprint.pprint("step[{}].watches: {}".format(self.current, step.watches))
+        return step
 
     def at_end(self) -> bool:
         return self.current >= len(self.dextIR.steps)
 
     def increment(self) -> bool:
+        """Increment iterator.
+        Return true if the iterator is still dereferencable.
+        """
         self._skip_empty_watches()
         self.current += 1
         return not self.at_end()
 
-    def shallow_copy(self):
+    def __copy__(self):
         return DextStepIter(self.dextIR, self.current)
 
     # @@ temp, skip over steps with no watches

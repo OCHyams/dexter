@@ -21,6 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from copy import copy
+
 from dex.dextIR import DextStepIter, StepIR
 from dex.command.commands.LTD.internal.Proposition import AtomicProposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
@@ -32,9 +34,9 @@ class Not(UnaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- Not ---v")
-        result =  not self.operand.eval(program.shallow_copy())
+        result =  not self.operand.eval(trace_iter)
         print("^--- Not (ret {}) ---^".format(result))
         return result
 
@@ -49,10 +51,10 @@ class And(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- And ---v")
-        result = (self.lhs.eval(program.shallow_copy())
-                and self.rhs.eval(program.shallow_copy()))
+        result = (self.lhs.eval(trace_iter)
+                and self.rhs.eval(trace_iter))
         print("^--- And (ret {}) ---^".format(result))
         return result
 
@@ -68,9 +70,9 @@ class Or(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, program: DextStepIter):
-        return (self.lhs.eval(program.shallow_copy())
-                or self.rhs.eval(program.shallow_copy()))
+    def eval(self, trace_iter: DextStepIter):
+        return (self.lhs.eval(trace_iter)
+                or self.rhs.eval(trace_iter))
 
     def __str__(self):
         return super().__str__()
@@ -85,23 +87,24 @@ class Weak(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
-        while not program.at_end():
+        trace_iter = copy(trace_iter)
+        while not trace_iter.at_end():
             print("v--- Weak step ---v")
-            result = self.rhs.eval(program.shallow_copy())
+            result = self.rhs.eval(trace_iter)
             print("Weak rhs -- {}".format(result))
             if result is True:
                 print("^--- Weak step (rhs True) ---^")
                 return True
             else:
-                result = self.lhs.eval(program.shallow_copy())
+                result = self.lhs.eval(trace_iter)
                 print("Weak lhs -- {}".format(result))
                 if result is False:
                     print("^--- Weak step (lhs False) ---^")
                     return False
             print("^--- Weak step ---^")
-            program.increment()
+            trace_iter.increment()
 
         print("^--- Weak (ret False)---^")
         return True
@@ -118,24 +121,24 @@ class Until(BinaryOperator):
         super().__init__(*args)
 
 ## @@ consider renaming to reduce confusion with CommandBase
-    def eval(self, program: DextStepIter):
+    def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
-
-        while not program.at_end():
+        trace_iter = copy(trace_iter)
+        while not trace_iter.at_end():
             print("v--- Until step ---v")
-            result = self.rhs.eval(program.shallow_copy())
+            result = self.rhs.eval(trace_iter)
             print("Until rhs -- {}".format(result))
             if result is True:
                 print("^--- Until step (rhs {})---^".format(result))
                 return True
             else:
-                result = self.lhs.eval(program.shallow_copy())
+                result = self.lhs.eval(trace_iter)
                 print("Until lhs -- {}".format(result))
                 if result is False:
                     print("^--- Until step (lhs False)---^")
                     return False
             print("^--- Until step ---^")
-            program.increment()
+            trace_iter.increment()
 
         print("^--- Until (ret False)---^")
         return False

@@ -39,8 +39,8 @@ class DexVerify(CommandBase):
             self.model = Boolean(self.model)
 
     def eval(self, program: DextIR) -> bool:
-        program_itr = DextStepIter(program)
-        return self.model.eval(program_itr)
+        trace_iter = DextStepIter(program)
+        return self.model.eval(trace_iter)
 
     def __str__(self):
         return "DexVerify({})".format(self.model)
