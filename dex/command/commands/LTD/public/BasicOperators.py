@@ -119,7 +119,7 @@ class Until(BinaryOperator):
     def __init__(self, *args):
         super().__init__(*args)
 
-## @@ consider renaming to reduce confusion with CommandBase
+    # [TODO] Consider renaming to reduce confusion with CommandBase
     def eval(self, trace_iter: DextStepIter):
         print("v--- {} ---v".format(self))
         trace_iter = copy(trace_iter)

@@ -28,8 +28,8 @@ from dex.command.commands.LTD.internal.Proposition import (
 )
 
 class UnaryOperator(Proposition):
-    ## @@ implement a nice __rep__
-    ## @@ implement a nice __str__ which prints a tree-like pattern.
+    ## [TODO] implement a nice __rep__
+    ## [TODO] implement a nice __str__ which prints a tree-like pattern.
     def __init__(self, *args):
         if len(args) != 1:
             raise TypeError('Expected exactly one arg')
