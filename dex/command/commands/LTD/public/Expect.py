@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from dex.dextIR import DextStepIter, StepIR
+from dex.dextIR import DextStepIter
 from dex.command.commands.LTD.internal.Proposition import Proposition
 from dex.command.commands.LTD.internal.OperatorTypes import (
     BinaryOperator, UnaryOperator
