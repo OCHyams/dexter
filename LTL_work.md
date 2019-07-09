@@ -78,13 +78,13 @@ DexVerify(Eventually(And(Expect('a', 5), Eventually(Expect('b', 1)))))
 ```
 
 
-## Motivation
+## 2. Motivation
 
 We needed a better way to represent the changes in program state.
 @@TODO Write more about why we chose LTL and talk about regex
+e.g. explain what you can do here that you can't with other dexcommands
 
-
-## Thoery
+## 3. Thoery
 The DexVerify command formulae are based on Linear Temporal Logic (LTL).
 The standard definition of LTL is as follows (modified from [this](https://www.win.tue.nl/~jschmalt/teaching/2IX20/reader_software_specification_ch_9.pdf) source):
 
@@ -103,8 +103,8 @@ Where:
 
 Usual boolean connectives can be derived:
 ```
-!(p /\ q) == p \/ q   // (disjunciton): i.e. OR
-!p \/ q == p --> q    // (implication):
+!(p /\ q) == p \/ q   // (disjunciton)
+!p \/ q == p --> q    // (implication)
 ```
 
 From the syntax, we define the following:
@@ -119,50 +119,81 @@ F p == true U p  // p will hold at some point in the Future.
 ```
 There are others, e.g. Weak(W) and Release(R) and more.
 
-Operator precedence:
+[This](http://www.lsv.fr/~gastin/ltl2ba/index.php) website is a fantastic
+resource for viewing your LTL formula as a Büchi automaton.
+
+Operator precedence doesn't matter for our case because all operators
+are exposed as functions, but for infix LTL:
 1. Unary operators
 2. Binary temporal
 3. Binary boolean
+
+
+## 4. Quick reference
+### Atomic propositions
+#### Boolean
+```
+True
+False
+```
+Not strictly "atomic propositions" in terms of LTL theory.
+
+#### Expect
+```
+Expect(p, q)
+```
+Expression `p` must evaluate to value 'q'.
+
+### Boolean functions
+
+#### And
+
+#### Or
+
+#### Not
+
+### Temporal functions
+
+#### Until
+```
+Until(p, q)
+```
+`q` must eventually hold and until then `p` must hold.
+LTL definition: `U`, Until
+
+#### Weak
+```
+Weak(p, q)
+```
+`p` must hold so long as `q` does not.
+LTL definition: `W`, Weak, Weak until
+
+#### Eventually
+```
+Eventually(p)
+```
+`p` must eventually hold.
+LTL definition: `True U p`, `F`, Finally, Eventually, Future.
+
+#### Release
+```
+Release(p, q)
+```
+`p` must eventually hold and up to and including that time `q` must hold.
+NOTE: Operand order and keyword *including*.
+LTL definition:
+
+#### Henceforth
+```
+Henceforth(p)
+```
+`p` must hold from now onwards.
+LTL definition:
 ---
 
-[This](http://www.lsv.fr/~gastin/ltl2ba/index.php) website is a fantastic
-resource -- view your LTL as a Büchi automaton.
-
-## LTD (Linear Temporal Dexter commands)
-We expose the LTL operators as functions. This makes the formulae easy to parse
-because the functions will map directly to python like the existing DexCommands.
-
-Temporal operators are right associative and boolean connectives are left
-associative.
 
 ### LTD functors
-```
-Proposition
-  // Atomic propositions
-  ExpectValues(Proposition)
-    vars: list
-    values: list
-  ExpectStack(Proposition)
-    frames: list
-  ExpectState(ExpectValues, ExpectStack)
 
-  // Unary operators
-  Not(Proposition)
-    prop: Proposition
-  Next(Proposition)
-
-  // Binary boolean operators
-  BinaryBoolean(Proposition)
-    Or(BinaryBoolean)
-      list: Proposition
-    And(BinaryBoolean)
-      list: Proposition
-
-  // Binary temporal operators
-  Until(BinaryTemporal)
-    lhs: Proposition
-    rhs: Proposition
-```
 The binary boolean operators all take a list argument. This is syntactic sugar
 for a chained sequence of operators. Temporal binary operators cannot accept
 a list because it doesn't make sense for our use case (remember that binary
@@ -219,69 +250,7 @@ Order(p, q) == And(p, Until(p, q))
 ### Examples
 [todo] Redo examples
 
-### LTD Suggestions
 
-Renaming operators or patterns of operators may be useful. Subject to future
-changes, I like these substitutions (remember that binary operator functions
-take a list of operands):
-```
-Until    -> Consecutively
-Future   -> Eventually (This is the formal name anyway)
-And      -> All
-Or       -> Any
-```
-
-Then instead of:
-```
-DexVerify(
-  Future(
-    Until(
-      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
-      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
-      Future(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
-    )
-  )
-)
-```
-we could write:
-```
-DexVerify(
-  Eventually(
-    Consecutively(
-      ExpectState({stack: [f, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [17]}),
-      ExpectState({stack: [main, *], vars: [s.a[0], s.a[1], s.a[2], <etc>], values: [0, 1, 2, <etc>], lines: [27]}),
-      Eventually(ExpectState({stack: [b, *], vars: [x], values: [42], lines: [40]}))
-    )
-  )
-)
-```
-We can have syntactic sugar too. If we say that a list of propositions that are
-**Eventually** true, **Consecutively**, are listed **Sequentially** then we can
-change the following example (which I've updated with the syntax proposed above)
-from this:
-```
-DexVerify(
-  Consecutively(
-    Eventually(ExpectState({lines: [7], vars:[c], values:[1]})),
-    Eventually(ExpectState({lines: [7], vars:[c], values:[2]})),
-    Eventually(ExpectState({lines: [7], vars:[c], values:[3]})),
-    Eventually(ExpectState({lines: [7], vars:[c], values:[4]})),
-    Eventually(ExpectState({lines: [7], vars:[c], values:[5]}))
-  )
-)
-```
-to this:
-```
-DexVerify(
-  Sequentially(
-    ExpectState({lines: [7], vars:[c], values:[1]}),
-    ExpectState({lines: [7], vars:[c], values:[2]}),
-    ExpectState({lines: [7], vars:[c], values:[3]}),
-    ExpectState({lines: [7], vars:[c], values:[4]}),
-    ExpectState({lines: [7], vars:[c], values:[5]})
-  )
-)
-```
 ### @@ TODO/notes
 1. The Expect syntax will not look anything like this.
 2. Makes sense for the first step to be stepping into main -- discuss with team.
