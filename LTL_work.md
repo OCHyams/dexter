@@ -181,6 +181,14 @@ Henceforth(p)
 `p` must hold from now onwards.<br/>
 LTL definition: `G` &#8801; Globally &#8801; `False R p`
 
+#### After
+```
+After(p, q)
+```
+`p` holds at some point after `q`. Both must hold at some point but not
+simultaneously.<br/>
+LTL definition: `A` &#8801; After &#8801; `q /\ X(F(p))`
+
 ---
 ### Examples
 [TODO] Add examples after coming up with some syntactic sugar for the common
