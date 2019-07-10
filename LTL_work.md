@@ -190,3 +190,6 @@ patterns.
 ### [TODO] / notes
 1. The Expect syntax will not look anything like this.
 2. Makes sense for the first step to be stepping into main -- discuss with team.
+3. It seems like all DexVerify() commands start wth Eventually. It might make
+sense to bake this in? E.g.
+DexVerify(p) == Eventually(And(Expect({frames: {main}}), p))
