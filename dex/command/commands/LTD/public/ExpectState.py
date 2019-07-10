@@ -40,6 +40,7 @@ def state_from_dict(source: dict) -> ProgramState:
         source['frames'] = list(map(frame_from_dict, source['frames']))
     return ProgramState(**source)
 
+
 class ExpectState(Proposition):
     def __init__(self, *args, **kwargs):
         if len(args) != 1:
@@ -49,20 +50,15 @@ class ExpectState(Proposition):
 
         self.expected_program_state = state_from_dict(args[0])
 
-        #[TODO] Remove ExpectState.times for LTD
-        #self.times = kwargs.pop('times', -1)
         if kwargs:
             raise TypeError('unexpected named args: {}'.format(
                 ', '.join(kwargs)))
 
-        # Step indices at which the expected program state was encountered.
         self.encounters = []
 
     def eval(self, trace_iter: DextStepIter) -> bool:
-        for step in trace_iter.dereference():
-            if self.expected_program_state.match(step.program_state):
-                return True
-        return False
+        step = trace_iter.dereference()
+        return self.expected_program_state.match(step.program_state)
 
     def __str__(self):
         return "ExpectState({})".format(self.program_state_text)
