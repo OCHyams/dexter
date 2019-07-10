@@ -41,6 +41,7 @@ def state_from_dict(source: dict) -> ProgramState:
     return ProgramState(**source)
 
 
+# [TODO] Let this live alongside DexExpectProgramState without butchering it
 class ExpectState(Proposition):
     def __init__(self, *args, **kwargs):
         if len(args) != 1:

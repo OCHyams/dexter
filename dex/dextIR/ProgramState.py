@@ -107,11 +107,6 @@ class ProgramState:
             enumerate(self.frames)))
 
     def match(self, other) -> bool:
-        result = self._match(other)
-        print("State match result is {}".format(result))
-        return result
-
-    def _match(self, other) -> bool:
         if not other or not isinstance(other, ProgramState):
             return False
 
