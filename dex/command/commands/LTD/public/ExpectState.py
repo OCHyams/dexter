@@ -58,6 +58,8 @@ class ExpectState(Proposition):
         self.encounters = []
 
     def eval(self, trace_iter: DextStepIter) -> bool:
+        if trace_iter.at_end():
+            return False
         step = trace_iter.dereference()
         return self.expected_program_state.match(step.program_state)
 
