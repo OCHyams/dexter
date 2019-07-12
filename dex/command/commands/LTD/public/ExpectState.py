@@ -20,42 +20,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"""Command for specifying a partial or complete state for the program to enter
-during execution.
+"""LTD proposition based on DexExpectProgramState.
 """
 
 from dex.dextIR import DextStepIter
 from dex.command.commands.LTD.internal.Proposition import Proposition
-from dex.dextIR import ProgramState, SourceLocation, StackFrame, DextIR
-
-def frame_from_dict(source: dict) -> StackFrame:
-    if 'location' in source:
-        assert isinstance(source['location'], dict)
-        source['location'] = SourceLocation(**source['location'])
-    return StackFrame(**source)
-
-def state_from_dict(source: dict) -> ProgramState:
-    if 'frames' in source:
-        assert isinstance(source['frames'], list)
-        source['frames'] = list(map(frame_from_dict, source['frames']))
-    return ProgramState(**source)
+from dex.command.commands.DexExpectProgramState import state_from_dict
 
 
-# [TODO] Let this live alongside DexExpectProgramState without butchering it
 class ExpectState(Proposition):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args):
         if len(args) != 1:
             raise TypeError('expected exactly one unnamed arg')
 
         self.program_state_text = str(args[0])
-
         self.expected_program_state = state_from_dict(args[0])
-
-        if kwargs:
-            raise TypeError('unexpected named args: {}'.format(
-                ', '.join(kwargs)))
-
-        self.encounters = []
 
     def eval(self, trace_iter: DextStepIter) -> bool:
         if trace_iter.at_end():
