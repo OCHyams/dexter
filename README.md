@@ -13,6 +13,12 @@ The following command evaluates your environment, listing the available and comp
     dexter.py list-debuggers
 
 ## Dependencies
+[TODO] Add a requirements.txt or an install.py and document it here.
+
+### Python 3.6
+
+DExTer requires at least python 3.6. This means that LLDB must also be built
+with at least 3.6 if you wish to use it.
 
 ### pywin32 python package
 
