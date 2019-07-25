@@ -2,10 +2,12 @@
 //      Check that DexExpectStepOrder applies no penalty when the expected
 //      order is found.
 //
+// REQUIRES: linux, clang, lldb
+//
 // RUN: dexter.py test --fail-lt 1.0 -w \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -g" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: step_order:
+// CHECK: good_step_order:
 
 int main()
 {
