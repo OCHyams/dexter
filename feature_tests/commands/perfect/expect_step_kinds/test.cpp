@@ -7,7 +7,7 @@
 // RUN: dexter.py test --fail-lt 1.0 -w  \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -g" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: step_kinds:
+// CHECK: expect_step_kinds:
 
 #include <cstdlib>
 
@@ -24,6 +24,6 @@ int main()
     return 0;
 }
 
-// [TODO] Test 'BACKWARD', 'FORWARD'
 // DexExpectStepKind('FUNC', 5)
 // DexExpectStepKind('FUNC_EXTERNAL', 2)
+// DexExpectStepKind('BACKWARD', 2)

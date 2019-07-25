@@ -7,7 +7,7 @@
 // RUN: dexter.py test --fail-lt 1.0 -w \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -g" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: factorial:
+// CHECK: expect_watch_value:
 
 unsigned long Factorial(int n) {
     volatile unsigned long fac = 1; // DexLabel('entry')

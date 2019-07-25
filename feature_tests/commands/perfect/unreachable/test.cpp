@@ -1,13 +1,13 @@
 // Purpose:
-//    Check that DexUnreachable causes DExTer to report a fail if the command's
-//    line is stepped on.
+//    Check that DexUnreachable has no effect if the command line is never
+//    stepped on.
 //
 // REQUIRES: linux, clang, lldb
 //
 // RUN: dexter.py test --fail-lt 1.0 -w \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -g" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: good_unreachable:
+// CHECK: unreachable:
 
 int main()
 {

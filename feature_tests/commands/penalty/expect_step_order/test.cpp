@@ -7,7 +7,7 @@
 // RUN: not dexter.py test --fail-lt 1.0 -w \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -g" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: bad_step_order: (0.
+// CHECK: expect_step_order:
 
 int main()
 {

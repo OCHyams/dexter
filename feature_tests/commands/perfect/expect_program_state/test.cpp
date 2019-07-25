@@ -7,7 +7,7 @@
 // RUN: dexter.py test --fail-lt 1.0 -w \
 // RUN:     --builder clang --debugger lldb --cflags "-O0 -glldb" -- %S \
 // RUN:     | FileCheck %s
-// CHECK: gcd:
+// CHECK: expect_program_state:
 
 int GCD(int lhs, int rhs)
 {
