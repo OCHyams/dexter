@@ -1,0 +1,34 @@
+{InputFile} "nolto_msg_out/a.out"
+    {CompileUnit} "nolto_msg/ext0.cpp"
+
+{Source} "ext0.cpp"
+ 2    {Variable} "msg_hello" -> "const char *"
+ 3    {Variable} "msg_bye" -> "const char *"
+ 4    {Variable} "msg_default" -> "const char *"
+ 6    {Enum} "MSG_ID" -> "unsigned int"
+          - "id_bye" = 1
+          - "id_default" = 2
+          - "id_hello" = 0
+          - "id_max" = 3
+14    {Function} "get_msg" -> "const char *"
+          - No declaration
+14      {Parameter} "id" -> "unsigned int"
+22    {Function} "get_msg_id_max" -> "const unsigned int"
+          - No declaration
+    {CompileUnit} "nolto_msg/ext1.cpp"
+
+{Source} "ext1.cpp"
+ 2    {Function} "generate_msg_id" -> "unsigned int"
+          - No declaration
+ 2      {Parameter} "max" -> "unsigned int"
+ 2      {Parameter} "val" -> "unsigned int"
+    {CompileUnit} "nolto_msg/main.cpp"
+
+{Source} "main.cpp"
+ 9    {Function} "main" -> "int"
+          - No declaration
+ 9      {Parameter} "argc" -> "int"
+ 9      {Parameter} "argv" -> "char * *"
+10      {Variable} "msg_max_id" -> "int"
+11      {Variable} "msg_id" -> "int"
+12      {Variable} "msg" -> "const char *"
