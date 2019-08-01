@@ -1,4 +1,4 @@
-{InputFile} "msg_off_lto/a.out"
+{InputFile} "msg_full_lto_O0/a.out"
     {CompileUnit} "msg/ext0.cpp"
       {PrimitiveType} -> "char"
           - 1 bytes
@@ -20,8 +20,6 @@
 22    {Function} "get_msg_id_max" -> "const unsigned int"
           - No declaration
     {CompileUnit} "msg/ext1.cpp"
-      {PrimitiveType} -> "unsigned int"
-          - 4 bytes
 
 {Source} "ext1.cpp"
  2    {Function} "generate_msg_id" -> "unsigned int"
@@ -29,8 +27,6 @@
  2      {Parameter} "max" -> "unsigned int"
  2      {Parameter} "val" -> "unsigned int"
     {CompileUnit} "msg/main.cpp"
-      {PrimitiveType} -> "char"
-          - 1 bytes
       {PrimitiveType} -> "int"
           - 4 bytes
 

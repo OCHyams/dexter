@@ -7,7 +7,7 @@ OUT_FOLDER=$3       # Can be empty
 
 
 # Tweak:
-OPTL=2          # Optimsation level
+OPTL=1          # Optimsation level
 STATS=1         # Stat report (0, 1)
 # Comma separated list of ld flags.
 LFLAGLIST=""
@@ -29,7 +29,7 @@ fi
 SRC_FILES=$(ls $SRC_FOLDER/*.cpp)
 
 if [ -z $OUT_FOLDER ]
-then OUT_FOLDER="$SRC_FOLDER"_"$LTOL"_lto
+then OUT_FOLDER="$SRC_FOLDER"_"$LTOL"_lto_O"$OPTL"
 fi
 
 mkdir -p $OUT_FOLDER
@@ -42,8 +42,13 @@ echo $CMD
 echo "cd" $(pwd) > $BUILD_FILE
 echo $CMD >> $BUILD_FILE
 
+if [ $STATS = 1 ]
+then STATS_FILE="$OUT_FOLDER/stats.txt"
+else STATS_FILE"/dev/null"
+fi
+
 # Execute cmd
-$CMD
+$CMD > $STATS_FILE 2>&1
 
 # use diva to save readable dwarf
 DIVA_FILE="$OUT_FOLDER/diva.txt"
