@@ -15,11 +15,11 @@ LFLAGLIST=""
 
 # Script:
 if [ "$LTOL" = "off" ]
-then LTOL=""
-else LTOL="-flto="$LTOL
+then LTOFLAG=""
+else LTOFLAG="-flto="$LTOL
 fi
 
-CFLAGS="-g -O$OPTL -mllvm -stats=$STATS $LTOL -fuse-ld=lld"
+CFLAGS="-g -O$OPTL -mllvm -stats=$STATS $LTOFLAG -fuse-ld=lld"
 
 if [ -z "$LFLAGLIST" ]
 then LFLAGS=""
@@ -29,7 +29,7 @@ fi
 SRC_FILES=$(ls $SRC_FOLDER/*.cpp)
 
 if [ -z $OUT_FOLDER ]
-then OUT_FOLDER="$SRC_FOLDER"_out
+then OUT_FOLDER="$SRC_FOLDER"_"$LTOL"_lto
 fi
 
 mkdir -p $OUT_FOLDER
@@ -44,3 +44,11 @@ echo $CMD >> $BUILD_FILE
 
 # Execute cmd
 $CMD
+
+# use diva to save readable dwarf
+DIVA_FILE="$OUT_FOLDER/diva.txt"
+
+#diva $OUT_FOLDER/a.out --show-codeline \
+diva $OUT_FOLDER/a.out --show-all \
+    > $DIVA_FILE
+
