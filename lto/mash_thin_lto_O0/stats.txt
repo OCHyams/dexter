@@ -1,0 +1,21 @@
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+1 cgscc-passmgr - Maximum CGSCCPassMgr iterations on one SCC
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+1 cgscc-passmgr - Maximum CGSCCPassMgr iterations on one SCC
+1 inline        - Number of functions deleted because all callers found
+4 inline        - Number of functions inlined
+3 inline        - Number of allocas merged together
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+1 cgscc-passmgr - Maximum CGSCCPassMgr iterations on one SCC
+

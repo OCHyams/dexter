@@ -1,0 +1,113 @@
+{InputFile} "lto/mash_full_lto_O0/a.out"
+    {CompileUnit} "lto/mash/ext0.cpp"
+      {PrimitiveType} -> "bool"
+          - 1 bytes
+      {PrimitiveType} -> "char"
+          - 1 bytes
+      {PrimitiveType} -> "int"
+          - 4 bytes
+
+{Source} "ext0.cpp"
+ 1    {Struct} "iterator"
+ 2      {Member} public "index_" -> "int"
+ 3      {Function} "iterator::iterator" -> "void"
+            - Is declaration
+          {Parameter} "" -> "iterator *"
+          {Parameter} "" -> "int"
+ 4      {Function} "iterator::operator!=" -> "bool"
+            - Is declaration
+          {Parameter} "" -> "const iterator *"
+          {Parameter} "" -> "const iterator &"
+ 5      {Function} "iterator::operator*" -> "int"
+            - Is declaration
+          {Parameter} "" -> "iterator *"
+ 6      {Function} "iterator::operator++" -> "int"
+            - Is declaration
+          {Parameter} "" -> "iterator *"
+ 3    {Function} "iterator" -> "void"
+          - Declaration @ ext0.cpp,3
+        {Parameter} "this" -> "iterator *"
+ 3      {Parameter} "index" -> "int"
+ 4    {Function} "operator!=" -> "bool"
+          - Declaration @ ext0.cpp,4
+        {Parameter} "this" -> "const iterator *"
+ 4      {Parameter} "rhs" -> "const iterator &"
+ 5    {Function} "operator*" -> "int"
+          - Declaration @ ext0.cpp,5
+        {Parameter} "this" -> "iterator *"
+ 6    {Function} "operator++" -> "int"
+          - Declaration @ ext0.cpp,6
+        {Parameter} "this" -> "iterator *"
+ 9    {Struct} "range<0, 5>"
+          - Template
+        {TemplateParameter} "range<0, 5>::BEGIN" <- 0
+        {TemplateParameter} "range<0, 5>::END" <- 5
+10      {Function} "range<0, 5>::begin" -> "iterator"
+            - Is declaration
+          {Parameter} "" -> "const range<0, 5> *"
+11      {Function} "range<0, 5>::end" -> "iterator"
+            - Is declaration
+          {Parameter} "" -> "const range<0, 5> *"
+10    {Function} "begin" -> "iterator"
+          - Declaration @ ext0.cpp,10
+        {Parameter} "this" -> "const range<0, 5> *"
+11    {Function} "end" -> "iterator"
+          - Declaration @ ext0.cpp,11
+        {Parameter} "this" -> "const range<0, 5> *"
+14    {Function} "sum_range" -> "int"
+          - No declaration
+        {Block}
+          {Block}
+17          {Variable} "elem" -> "volatile int"
+          {Variable} "__begin1" -> "iterator"
+          {Variable} "__end1" -> "iterator"
+          {Variable} "__range1" -> "range<0, 5> &"
+14      {Parameter} "" -> "char * *"
+14      {Parameter} "argc" -> "int"
+15      {Variable} "list" -> "range<0, 5>"
+16      {Variable} "total" -> "int"
+    {CompileUnit} "lto/mash/ext1.cpp"
+      {PrimitiveType} -> "__ARRAY_SIZE_TYPE__"
+          - 8 bytes
+      {PrimitiveType} -> "unsigned int"
+          - 4 bytes
+
+{Source} "ext1.cpp"
+ 1    {Variable} "g_a" -> "int"
+ 2    {Variable} "g_b" -> "int"
+ 3    {Variable} "g_c" -> "int"
+ 5    {Function} static "fn_a" -> "int"
+          - No declaration
+ 5      {Parameter} "i" -> "unsigned int"
+ 8      {Variable} "array" -> "int [5]"
+11    {Function} "something" -> "int"
+          - No declaration
+ 5      {Function} static "something::fn_a" -> "int"
+            - Declaration @ ext1.cpp,5
+            - Inlined
+ 5        {Parameter} "i" -> "unsigned int"
+ 8        {Variable} "array" -> "int [5]"
+ 5      {Function} static "something::fn_a" -> "int"
+            - Declaration @ ext1.cpp,5
+            - Inlined
+ 5        {Parameter} "i" -> "unsigned int"
+ 8        {Variable} "array" -> "int [5]"
+ 5      {Function} static "something::fn_a" -> "int"
+            - Declaration @ ext1.cpp,5
+            - Inlined
+ 5        {Parameter} "i" -> "unsigned int"
+ 8        {Variable} "array" -> "int [5]"
+ 5      {Function} static "something::fn_a" -> "int"
+            - Declaration @ ext1.cpp,5
+            - Inlined
+ 5        {Parameter} "i" -> "unsigned int"
+ 8        {Variable} "array" -> "int [5]"
+    {CompileUnit} "lto/mash/main.cpp"
+
+{Source} "main.cpp"
+ 8    {Function} "main" -> "int"
+          - No declaration
+ 8      {Parameter} "argc" -> "int"
+ 8      {Parameter} "argv" -> "char * *"
+ 9      {Variable} "a" -> "int"
+10      {Variable} "b" -> "int"

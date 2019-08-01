@@ -1,0 +1,175 @@
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  68 asm-printer           - Number of machine instrs printed
+  17 assembler             - Number of emitted assembler fragments - align
+  73 assembler             - Number of emitted assembler fragments - data
+ 140 assembler             - Number of emitted assembler fragments - total
+   2 assembler             - Number of emitted assembler fragments - relaxable
+ 140 assembler             - Number of fragment layouts
+8936 assembler             - Number of emitted object file bytes
+   2 assembler             - Number of assembler layout and relaxation steps
+ 153 assembler             - Number of evaluated fixups
+   1 cgscc-passmgr         - Maximum CGSCCPassMgr iterations on one SCC
+   1 codegenprepare        - Number of blocks eliminated
+   5 codegenprepare        - Number of uses of Cast expressions replaced with uses of sunken Casts
+   3 codegenprepare        - Number of debug value instructions moved
+  10 codegenprepare        - Number of GEPs converted to casts
+  18 dagcombine            - Number of dag nodes combined
+   1 dead-mi-elimination   - Number of dead instructions deleted
+   5 early-cse             - Number of instructions CSE'd
+   1 functionattrs         - Number of arguments marked nocapture
+   6 functionattrs         - Number of functions marked as norecurse
+   1 functionattrs         - Number of arguments marked readnone
+   6 globalopt             - Number of globals marked unnamed_addr
+   4 globalsmodref-aa      - Number of functions that do not access memory
+   4 globalsmodref-aa      - Number of functions that only read memory
+  28 instcombine           - Number of insts combined
+   1 instsimplify          - Number of redundant instructions removed
+  10 isel                  - Number of blocks selected using DAG
+ 267 isel                  - Number of times dag isel has to try another path
+   7 isel                  - Number of entry blocks encountered
+   5 lcssa                 - Number of live out of a loop variables
+   1 licm                  - Number of instructions hoisted out of loop
+   1 licm                  - Number of instructions sunk out of loop
+  12 livedebugvalues       - Number of DBG_VALUE instructions inserted
+  26 livedebugvars         - Number of DBG_VALUEs inserted
+   1 loop-rotate           - Number of loops rotated
+   1 loop-vectorize        - Number of loops analyzed for vectorization
+   2 machine-scheduler     - Number of instr pairs fused
+   2 machinelicm           - Number of machine instructions hoisted out of loops
+1153 mcexpr                - Number of MCExpr evaluations
+   1 mem2reg               - Number of PHI nodes inserted
+  11 mem2reg               - Number of alloca's promoted with a single store
+   2 phi-node-elimination  - Number of phis lowered
+  72 prologepilog          - Number of bytes used for stack in all functions
+   7 prologepilog          - Number of functions seen in PEI
+   2 reassociate           - Number of insts reassociated
+  29 regalloc              - Number of registers assigned
+   2 regalloc              - Number of instructions deleted by DCE
+   1 regalloc              - Number of interferences evicted
+  20 regalloc              - Number of identity moves eliminated after rewriting
+   1 regalloc              - Number of new live ranges queued
+   2 regalloc              - Number of instructions re-materialized
+   2 regalloc              - Number of shrinkToUses called
+   1 regalloc              - Number of registers unassigned
+   1 regalloc              - Number of cross class joins performed
+   8 regalloc              - Number of interval joins performed
+   2 scalar-evolution      - Number of loops without predictable loop counts
+   4 shrink-wrap           - Number of functions
+   6 simplifycfg           - Number of blocks simplified
+   1 sroa                  - Maximum number of partitions per alloca
+   6 sroa                  - Maximum number of uses of a partition
+  38 sroa                  - Number of alloca partition uses rewritten
+  14 sroa                  - Number of alloca partitions formed
+  25 sroa                  - Number of allocas analyzed for replacement
+  45 sroa                  - Number of instructions deleted
+  12 sroa                  - Number of allocas promoted to SSA values
+   8 stack-coloring        - Number of lifetime markers found.
+   7 stackmaps             - Number of functions skipped
+   7 stackmaps             - Number of functions visited
+   1 twoaddressinstruction - Number of instructions commuted to coalesce
+   1 twoaddressinstruction - Number of instructions promoted to 3-address
+   3 twoaddressinstruction - Number of two-address instructions
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  18 asm-printer           - Number of machine instrs printed
+   7 assembler             - Number of emitted assembler fragments - align
+  31 assembler             - Number of emitted assembler fragments - data
+  53 assembler             - Number of emitted assembler fragments - total
+   4 assembler             - Number of emitted assembler fragments - relaxable
+  56 assembler             - Number of fragment layouts
+3712 assembler             - Number of emitted object file bytes
+   2 assembler             - Number of assembler layout and relaxation steps
+  54 assembler             - Number of evaluated fixups
+   1 cgscc-passmgr         - Maximum CGSCCPassMgr iterations on one SCC
+  13 dagcombine            - Number of dag nodes combined
+   2 early-cse             - Number of instructions CSE'd
+   4 early-cse             - Number of load instructions CSE'd
+   2 functionattrs         - Number of functions marked as norecurse
+   1 functionattrs         - Number of functions marked readnone
+   3 globalopt             - Number of globals deleted
+   1 globalopt             - Number of functions converted to fastcc
+   1 globalopt             - Number of internal functions
+   5 globalopt             - Number of globals marked unnamed_addr
+   4 globalsmodref-aa      - Number of functions that do not access memory
+   1 globalsmodref-aa      - Number of functions without address taken
+   2 globalsmodref-aa      - Number of global vars without address taken
+   5 globalsmodref-aa      - Number of functions that only read memory
+   1 inline                - Number of functions deleted because all callers found
+   4 inline                - Number of functions inlined
+   1 instcombine           - Number of insts combined
+   1 instcombine           - Number of dead inst eliminated
+   1 instcombine           - Number of allocas copied from constant global
+   4 isel                  - Number of blocks selected using DAG
+  97 isel                  - Number of times dag isel has to try another path
+   1 isel                  - Number of entry blocks encountered
+   2 livedebugvars         - Number of DBG_VALUEs inserted
+   2 machine-scheduler     - Number of instr pairs fused
+   1 machine-sink          - Number of machine instructions sunk
+ 330 mcexpr                - Number of MCExpr evaluations
+   1 mem2reg               - Number of alloca's promoted within one block
+   1 prologepilog          - Number of functions seen in PEI
+   6 regalloc              - Number of registers assigned
+   1 regalloc              - Number of identity moves eliminated after rewriting
+   6 regalloc              - Number of cross class joins performed
+   9 regalloc              - Number of interval joins performed
+   1 shrink-wrap           - Number of functions
+   2 simplifycfg           - Number of blocks simplified
+   1 sroa                  - Maximum number of partitions per alloca
+   4 sroa                  - Maximum number of uses of a partition
+   4 sroa                  - Number of alloca partition uses rewritten
+   1 sroa                  - Number of alloca partitions formed
+   2 sroa                  - Number of allocas analyzed for replacement
+   4 sroa                  - Number of instructions deleted
+   1 sroa                  - Number of allocas promoted to SSA values
+   1 stackmaps             - Number of functions skipped
+   1 stackmaps             - Number of functions visited
+   1 twoaddressinstruction - Number of instructions aggressively commuted
+   1 twoaddressinstruction - Number of instructions commuted to coalesce
+   4 twoaddressinstruction - Number of two-address instructions
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  14 asm-printer         - Number of machine instrs printed
+   4 assembler           - Number of emitted assembler fragments - align
+  23 assembler           - Number of emitted assembler fragments - data
+  39 assembler           - Number of emitted assembler fragments - total
+  39 assembler           - Number of fragment layouts
+2984 assembler           - Number of emitted object file bytes
+   2 assembler           - Number of assembler layout and relaxation steps
+  27 assembler           - Number of evaluated fixups
+   1 cgscc-passmgr       - Maximum CGSCCPassMgr iterations on one SCC
+   2 dead-mi-elimination - Number of dead instructions deleted
+   3 globalopt           - Number of globals deleted
+   3 globalopt           - Number of globals marked unnamed_addr
+   2 globalsmodref-aa    - Number of functions that do not access memory
+   2 globalsmodref-aa    - Number of functions that only read memory
+   1 isel                - Number of blocks selected using DAG
+   6 isel                - Number of times dag isel has to try another path
+   1 isel                - Number of entry blocks encountered
+   8 livedebugvars       - Number of DBG_VALUEs inserted
+ 259 mcexpr              - Number of MCExpr evaluations
+   5 mem2reg             - Number of alloca's promoted with a single store
+  24 prologepilog        - Number of bytes used for stack in all functions
+   1 prologepilog        - Number of functions seen in PEI
+   2 regalloc            - Number of registers assigned
+   1 regalloc            - Number of instructions deleted by DCE
+   1 regalloc            - Number of instructions re-materialized
+   1 regalloc            - Number of shrinkToUses called
+   1 sroa                - Maximum number of partitions per alloca
+   3 sroa                - Maximum number of uses of a partition
+  11 sroa                - Number of alloca partition uses rewritten
+   5 sroa                - Number of alloca partitions formed
+   5 sroa                - Number of allocas analyzed for replacement
+  15 sroa                - Number of instructions deleted
+   5 sroa                - Number of allocas promoted to SSA values
+   1 stackmaps           - Number of functions skipped
+   1 stackmaps           - Number of functions visited
+

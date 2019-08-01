@@ -1,0 +1,96 @@
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+28 adce             - Number of instructions removed
+ 1 cgscc-passmgr    - Maximum CGSCCPassMgr iterations on one SCC
+ 5 early-cse        - Number of instructions CSE'd
+ 1 functionattrs    - Number of arguments marked nocapture
+ 6 functionattrs    - Number of functions marked as norecurse
+ 1 functionattrs    - Number of functions marked as nounwind
+ 1 functionattrs    - Number of arguments marked readnone
+ 6 globalopt        - Number of globals marked unnamed_addr
+ 2 globalsmodref-aa - Number of functions that do not access memory
+ 2 globalsmodref-aa - Number of functions that only read memory
+ 1 gvn              - Number of blocks merged
+ 6 inline           - Number of functions deleted because all callers found
+ 7 inline           - Number of functions inlined
+ 7 inline-cost      - Number of call sites analyzed
+33 instcombine      - Number of insts combined
+16 instcombine      - Number of dead inst eliminated
+ 4 instcombine      - Number of factorizations
+ 2 lcssa            - Number of live out of a loop variables
+ 1 licm             - Number of instructions hoisted out of loop
+ 1 licm             - Number of instructions sunk out of loop
+ 1 loop-rotate      - Number of loops rotated
+ 1 loop-unroll      - Number of loops completely unrolled
+ 1 loop-unroll      - Number of loops unrolled (completely or otherwise)
+ 1 mem2reg          - Number of dead alloca's removed
+ 2 mem2reg          - Number of PHI nodes inserted
+14 mem2reg          - Number of alloca's promoted with a single store
+ 2 reassociate      - Number of insts reassociated
+ 1 scalar-evolution - Number of loops with predictable loop counts
+ 2 simplifycfg      - Number of blocks simplified
+ 1 sroa             - Maximum number of partitions per alloca
+ 7 sroa             - Maximum number of uses of a partition
+55 sroa             - Number of alloca partition uses rewritten
+19 sroa             - Number of alloca partitions formed
+25 sroa             - Number of allocas analyzed for replacement
+80 sroa             - Number of instructions deleted
+ 5 sroa             - Number of new, smaller allocas introduced
+17 sroa             - Number of allocas promoted to SSA values
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+1 cgscc-passmgr    - Maximum CGSCCPassMgr iterations on one SCC
+2 early-cse        - Number of instructions CSE'd
+4 early-cse        - Number of load instructions CSE'd
+2 functionattrs    - Number of functions marked as norecurse
+1 functionattrs    - Number of functions marked readnone
+3 globalopt        - Number of globals deleted
+1 globalopt        - Number of functions converted to fastcc
+1 globalopt        - Number of internal functions
+5 globalopt        - Number of globals marked unnamed_addr
+2 globalsmodref-aa - Number of functions that do not access memory
+1 globalsmodref-aa - Number of functions without address taken
+1 globalsmodref-aa - Number of global vars without address taken
+3 globalsmodref-aa - Number of functions that only read memory
+1 gvn              - Number of instructions deleted
+1 gvn              - Number of loads PRE'd
+1 inline           - Number of functions deleted because all callers found
+4 inline           - Number of functions inlined
+1 instcombine      - Number of insts combined
+1 instcombine      - Number of dead inst eliminated
+1 instcombine      - Number of allocas copied from constant global
+1 mem2reg          - Number of alloca's promoted within one block
+1 memdep           - Number of block queries that were completely cached
+6 memdep           - Number of uncached non-local ptr responses
+2 simplifycfg      - Number of blocks simplified
+1 sroa             - Maximum number of partitions per alloca
+4 sroa             - Maximum number of uses of a partition
+4 sroa             - Number of alloca partition uses rewritten
+1 sroa             - Number of alloca partitions formed
+2 sroa             - Number of allocas analyzed for replacement
+4 sroa             - Number of instructions deleted
+1 sroa             - Number of allocas promoted to SSA values
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+ 1 cgscc-passmgr    - Maximum CGSCCPassMgr iterations on one SCC
+ 3 globalopt        - Number of globals deleted
+ 3 globalopt        - Number of globals marked unnamed_addr
+ 1 globalsmodref-aa - Number of functions that do not access memory
+ 1 globalsmodref-aa - Number of functions that only read memory
+ 5 mem2reg          - Number of alloca's promoted with a single store
+ 1 sroa             - Maximum number of partitions per alloca
+ 3 sroa             - Maximum number of uses of a partition
+11 sroa             - Number of alloca partition uses rewritten
+ 5 sroa             - Number of alloca partitions formed
+ 5 sroa             - Number of allocas analyzed for replacement
+15 sroa             - Number of instructions deleted
+ 5 sroa             - Number of allocas promoted to SSA values
+

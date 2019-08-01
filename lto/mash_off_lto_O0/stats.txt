@@ -1,0 +1,83 @@
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  96 asm-printer           - Number of machine instrs printed
+  16 assembler             - Number of emitted assembler fragments - align
+  84 assembler             - Number of emitted assembler fragments - data
+ 161 assembler             - Number of emitted assembler fragments - total
+ 161 assembler             - Number of fragment layouts
+7736 assembler             - Number of emitted object file bytes
+   2 assembler             - Number of assembler layout and relaxation steps
+ 115 assembler             - Number of evaluated fixups
+   1 cgscc-passmgr         - Maximum CGSCCPassMgr iterations on one SCC
+   7 isel                  - Number of entry blocks encountered
+  11 isel                  - Number of blocks selected entirely by fast isel
+   3 isel                  - Number of dead insts removed on failure
+  74 isel                  - Number of instructions fast isel selected
+  29 isel                  - Number of insts selected by target-independent selector
+  42 isel                  - Number of insts selected by target-specific selector
+1217 mcexpr                - Number of MCExpr evaluations
+ 200 prologepilog          - Number of bytes used for stack in all functions
+   7 prologepilog          - Number of functions seen in PEI
+  43 regalloc              - Number of copies coalesced
+   7 stackmaps             - Number of functions skipped
+   7 stackmaps             - Number of functions visited
+   4 twoaddressinstruction - Number of two-address instructions
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  88 asm-printer   - Number of machine instrs printed
+   7 assembler     - Number of emitted assembler fragments - align
+  50 assembler     - Number of emitted assembler fragments - data
+  91 assembler     - Number of emitted assembler fragments - total
+  94 assembler     - Number of fragment layouts
+4504 assembler     - Number of emitted object file bytes
+   2 assembler     - Number of assembler layout and relaxation steps
+  59 assembler     - Number of evaluated fixups
+   1 cgscc-passmgr - Maximum CGSCCPassMgr iterations on one SCC
+   1 inline        - Number of functions deleted because all callers found
+   4 inline        - Number of functions inlined
+   3 inline        - Number of allocas merged together
+   1 isel          - Number of entry blocks encountered
+   6 isel          - Number of blocks selected entirely by fast isel
+   8 isel          - Number of dead insts removed on failure
+  54 isel          - Number of instructions fast isel selected
+  13 isel          - Number of insts selected by target-independent selector
+  33 isel          - Number of insts selected by target-specific selector
+ 585 mcexpr        - Number of MCExpr evaluations
+  72 prologepilog  - Number of bytes used for stack in all functions
+   1 prologepilog  - Number of functions seen in PEI
+   9 regalloc      - Number of copies coalesced
+   4 regalloc      - Number of loads added
+   4 regalloc      - Number of stores added
+   1 stackmaps     - Number of functions skipped
+   1 stackmaps     - Number of functions visited
+
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
+
+  17 asm-printer   - Number of machine instrs printed
+   4 assembler     - Number of emitted assembler fragments - align
+  23 assembler     - Number of emitted assembler fragments - data
+  39 assembler     - Number of emitted assembler fragments - total
+  39 assembler     - Number of fragment layouts
+2736 assembler     - Number of emitted object file bytes
+   2 assembler     - Number of assembler layout and relaxation steps
+  25 assembler     - Number of evaluated fixups
+   1 cgscc-passmgr - Maximum CGSCCPassMgr iterations on one SCC
+   1 isel          - Number of entry blocks encountered
+   1 isel          - Number of blocks selected entirely by fast isel
+  14 isel          - Number of instructions fast isel selected
+   6 isel          - Number of insts selected by target-independent selector
+   8 isel          - Number of insts selected by target-specific selector
+ 255 mcexpr        - Number of MCExpr evaluations
+  40 prologepilog  - Number of bytes used for stack in all functions
+   1 prologepilog  - Number of functions seen in PEI
+   8 regalloc      - Number of copies coalesced
+   1 stackmaps     - Number of functions skipped
+   1 stackmaps     - Number of functions visited
+

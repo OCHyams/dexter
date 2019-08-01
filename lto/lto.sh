@@ -7,7 +7,7 @@ OUT_FOLDER=$3       # Can be empty
 
 
 # Tweak:
-OPTL=1          # Optimsation level
+OPTL=2          # Optimsation level
 STATS=1         # Stat report (0, 1)
 # Comma separated list of ld flags.
 LFLAGLIST=""
