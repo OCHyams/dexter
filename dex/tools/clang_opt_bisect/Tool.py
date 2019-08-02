@@ -68,6 +68,14 @@ class Tool(TestToolBase):
     def name(self):
         return 'DExTer clang opt bisect'
 
+    def add_tool_arguments(self, parser, defaults):
+        self.parser.add_argument(
+            '--bisect-ld',
+            default=False,
+            help='bisect the linker only'
+        )
+        super().add_tool_arguments(parser, defaults)
+
     def _get_bisect_limits(self):
         options = self.context.options
 
@@ -84,12 +92,16 @@ class Tool(TestToolBase):
                 results.append(all_passes[i])
         results.append(all_passes[-1])
 
-        assert len(results) == len(
-            options.source_files), (results, options.source_files)
+        assert getattr(options, 'bisect_ld', None) or (len(results) == len(
+            options.source_files)), (results, options.source_files)#@@
 
         limits = [
             int(Tool._re_running_pass.match(r).group(1)) for r in results
         ]
+
+        ##@@ hack alert
+        if options.bisect_ld:
+            limits *= len(options.source_files)
 
         return limits
 
@@ -253,12 +265,21 @@ class Tool(TestToolBase):
 
     def _clang_opt_bisect_build(self, opt_bisect_limits):
         options = self.context.options
-        compiler_options = [
-            '{} -mllvm -opt-bisect-limit={}'.format(options.cflags,
+
+        if options.bisect_ld:
+            compiler_options = [
+                '{}'.format(options.cflags) for _ in opt_bisect_limits
+            ]
+            linker_options =  '{} -Wl,-mllvm,-opt-bisect-limit={}'.format(
+                options.ldflags, opt_bisect_limits[0]) #@@
+
+        else:
+            compiler_options = [
+                '{} -mllvm -opt-bisect-limit={}'.format(options.cflags,
                                                     opt_bisect_limit)
-            for opt_bisect_limit in opt_bisect_limits
-        ]
-        linker_options = options.ldflags
+                for opt_bisect_limit in opt_bisect_limits
+            ]
+            linker_options = options.ldflags
 
         try:
             return run_external_build_script(

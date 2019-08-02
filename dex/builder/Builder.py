@@ -79,7 +79,9 @@ def run_external_build_script(context, script_path, source_files,
         cflags=compiler_options,
         ldflags=linker_options,
     )
-    assert len(source_files) == len(compiler_options), (source_files,
+
+    assert getattr(context.options, 'bisect_ld', None) or (
+        len(source_files) == len(compiler_options)), (source_files,
                                                         compiler_options)
 
     script_environ = _get_script_environment(source_files, compiler_options,
