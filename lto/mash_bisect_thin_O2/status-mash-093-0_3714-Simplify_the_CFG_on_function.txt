@@ -1,0 +1,64 @@
+running pass 1/261 on "ext0.cpp" [93/409]: (0.3714) +0.0286 Simplify the CFG on function (_Z9sum_rangeiPPc)
+
+## BEGIN ##
+.   [1, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [2, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   [3, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.STEP", "StepKind.FORWARD", []]
+.   [4, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   [5, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.STEP", "StepKind.FORWARD", []]
+.   [6, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   [7, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.STEP", "StepKind.FORWARD", []]
+.   [8, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   [9, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.STEP", "StepKind.FORWARD", []]
+[10, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 11, 5, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+## END (10 steps) ##
+
+
+  ext0.cpp:18 [argc] [3/7]
+    result optimized away:
+      step 1 [-3]
+      step 3
+      step 5
+      step 7
+      step 9
+
+  ext0.cpp:18 [elem] [0/21]
+    expected encountered values:
+      0
+      1
+      2
+      3
+      4
+
+  ext0.cpp:18 [total] [18/21]
+    expected encountered values:
+      0
+
+    missing values:
+      1 [-6]
+      3 [-6]
+      6 [-6]
+
+  ext1.cpp:7 [i] [21/21]
+    missing values:
+      0 [-6]
+      1 [-6]
+      2 [-6]
+      7 [-3]
+
+  ext1.cpp:9 [i] [18/21]
+    missing values:
+      0 [-6]
+      1 [-6]
+      2 [-6]
+
+  main.cpp:11 [a] [3/7]
+    result optimized away:
+      step 10 [-3]
+
+  main.cpp:11 [b] [3/7]
+    result optimized away:
+      step 10 [-3]
+
+
+

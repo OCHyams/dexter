@@ -1,0 +1,86 @@
+Pass,Kind,Sum,Min,Max,Interesting
+Function Integration/Inlining,SCC,-0.2857142857142857,-0.2857142857142857,0.0,True,0.0,-0.2857142857142857,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Combine redundant instructions,function,-0.17142857142857137,-0.17142857142857137,0.0,True,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.17142857142857137,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+SROA,function,-0.05714285714285716,-0.05714285714285716,0.0,True,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.05714285714285716,0.0
+X86 DAG->DAG Instruction Selection,function,-0.03809523809523818,-0.05714285714285716,0.01904761904761898,True,-0.05714285714285716,0.0,0.01904761904761898
+Machine Instruction Scheduler,function,-0.02857142857142858,-0.02857142857142858,0.0,True,0.0,-0.02857142857142858,0.0
+Remove dead machine instructions,function,-0.01904761904761898,-0.01904761904761898,0.0,True,0.0,0.0,0.0,0.0,-0.01904761904761898,0.0
+Simplify the CFG,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Deduce function attributes,SCC,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Remove unused exception handling info,SCC,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Jump Threading,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Value Propagation,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Aggressive Dead Code Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Bit-Tracking Dead Code Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Dead Store Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Early CSE,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Early CSE w/ MemorySSA,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Global Value Numbering,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+MemCpy Optimization,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+MergedLoadStoreMotion,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Promote Memory to Register,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Reassociate expressions,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Sparse Conditional Constant Propagation,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Speculatively execute instructions if target has divergent branches,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Tail Call Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Machine Copy Propagation Pass,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0
+Dead Global Elimination,module,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0
+Global Variable Optimizer,module,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0
+Alignment from assumptions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Branch Probability Basic Block Placement,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+BreakFalseDeps,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+CodeGen Prepare,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Constant Hoisting,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Control Flow Optimizer,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Early If-Conversion,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Early Machine Loop Invariant Code Motion,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Early Tail Duplication,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Expand memcmp() to load/stores,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Float to int,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Hoist/decompose integer division and remainder,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Live Range Shrink,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Local Dynamic TLS Access Clean-up,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Distribution,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Load Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Vectorization,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Machine Common Subexpression Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Machine Loop Invariant Code Motion,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Machine code sinking,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Merge contiguous icmps into a memcmp,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Optimize machine instruction PHIs,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Partially inline calls to library functions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Peephole Optimizations,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Post RA top-down list latency scheduler,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+PostRA Machine Sink,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+ReachingDefAnalysis,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Remove redundant instructions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+SLP Vectorizer,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Shrink Wrapping analysis,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Stack Slot Coloring,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Tail Duplication,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Two-Address instruction pass,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Warn about non-applied transformations,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Atom pad short functions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Avoid Store Forwarding Blocks,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Byte/Word Instruction Fixup,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Domain Reassignment Pass,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Execution Dependency Fix,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 LEA Fixup,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 LEA Optimize,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 Optimize Call Frame,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+X86 cmov Conversion,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Called Value Propagation,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Dead Argument Elimination,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Deduce function attributes in RPO,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Eliminate Available Externally Globals,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Infer set function attributes,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Interprocedural Sparse Conditional Constant Propagation,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Merge Duplicate Global Constants,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Strip Unused Function Prototypes,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Delete dead loops,loop,0.0,0.0,0.0,False,0.0
+Induction Variable Simplification,loop,0.0,0.0,0.0,False,0.0
+Loop Invariant Code Motion,loop,0.0,0.0,0.0,False,0.0
+Recognize loop idioms,loop,0.0,0.0,0.0,False,0.0
+Rotate Loops,loop,0.0,0.0,0.0,False,0.0
+Unroll loops,loop,0.0,0.0,0.0,False,0.0
+Unswitch loops,loop,0.0,0.0,0.0,False,0.0

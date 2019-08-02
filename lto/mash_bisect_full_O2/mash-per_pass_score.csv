@@ -1,0 +1,462 @@
+Source File,Pass,Score
+ext1.cpp,,0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,SROA on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,Early CSE on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,SROA on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Early CSE on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Infer set function attributes on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4285714285714286
+ext1.cpp,Interprocedural Sparse Conditional Constant Propagation on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4285714285714286
+ext1.cpp,Called Value Propagation on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4285714285714286
+ext1.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4285714285714286
+ext1.cpp,Promote Memory to Register on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,Promote Memory to Register on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Dead Argument Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Remove unused exception handling info on SCC (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Function Integration/Inlining on SCC (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Deduce function attributes on SCC (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,SROA on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Early CSE w/ MemorySSA on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Speculatively execute instructions if target has divergent branches on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Jump Threading on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Value Propagation on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Tail Call Elimination on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Reassociate expressions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,MergedLoadStoreMotion on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Global Value Numbering on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,MemCpy Optimization on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Sparse Conditional Constant Propagation on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Bit-Tracking Dead Code Elimination on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Jump Threading on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Value Propagation on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Dead Store Elimination on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Aggressive Dead Code Elimination on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Simplify the CFG on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Combine redundant instructions on function (_ZL4fn_aj),0.4285714285714286
+ext1.cpp,Remove unused exception handling info on SCC (_Z9somethingv),0.4285714285714286
+ext1.cpp,Function Integration/Inlining on SCC (_Z9somethingv),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (_Z9somethingv),0.4571428571428572
+ext1.cpp,SROA on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Early CSE w/ MemorySSA on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Speculatively execute instructions if target has divergent branches on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Jump Threading on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Value Propagation on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Tail Call Elimination on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Reassociate expressions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,MergedLoadStoreMotion on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Global Value Numbering on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,MemCpy Optimization on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Sparse Conditional Constant Propagation on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Bit-Tracking Dead Code Elimination on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Jump Threading on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Value Propagation on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Dead Store Elimination on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Aggressive Dead Code Elimination on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (llvm.dbg.declare),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (llvm.dbg.declare),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (llvm.dbg.declare),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (llvm.lifetime.start.p0i8),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (llvm.lifetime.start.p0i8),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (llvm.lifetime.start.p0i8),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (llvm.memcpy.p0i8.p0i8.i64),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (llvm.memcpy.p0i8.p0i8.i64),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (llvm.memcpy.p0i8.p0i8.i64),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (llvm.lifetime.end.p0i8),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (llvm.lifetime.end.p0i8),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (llvm.lifetime.end.p0i8),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (llvm.dbg.value),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (llvm.dbg.value),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (llvm.dbg.value),0.4571428571428572
+ext1.cpp,Remove unused exception handling info on SCC (<<null function>>),0.4571428571428572
+ext1.cpp,Function Integration/Inlining on SCC (<<null function>>),0.4571428571428572
+ext1.cpp,Deduce function attributes on SCC (<<null function>>),0.4571428571428572
+ext1.cpp,Deduce function attributes in RPO on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Float to int on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Loop Distribution on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Loop Vectorization on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Loop Load Elimination on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,SLP Vectorizer on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Combine redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Warn about non-applied transformations on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Alignment from assumptions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Strip Unused Function Prototypes on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Merge Duplicate Global Constants on module (/home/och/dev/dexter-fork/lto/mash/ext1.cpp),0.4571428571428572
+ext1.cpp,Remove redundant instructions on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Hoist/decompose integer division and remainder on function (_Z9somethingv),0.4571428571428572
+ext1.cpp,Simplify the CFG on function (_Z9somethingv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,SROA on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Early CSE on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Early CSE on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Infer set function attributes on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4571428571428572
+ext0.cpp,Interprocedural Sparse Conditional Constant Propagation on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4571428571428572
+ext0.cpp,Called Value Propagation on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4571428571428572
+ext0.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Promote Memory to Register on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Dead Argument Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorC2Ei),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE5beginEv),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK5rangeILi0ELi5EE3endEv),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,SROA on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZNK8iteratorneERKS_),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratordeEv),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,SROA on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,MergedLoadStoreMotion on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Global Value Numbering on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,MemCpy Optimization on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Sparse Conditional Constant Propagation on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Jump Threading on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Value Propagation on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Dead Store Elimination on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Aggressive Dead Code Elimination on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_ZN8iteratorppEv),0.4571428571428572
+ext0.cpp,Remove unused exception handling info on SCC (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Function Integration/Inlining on SCC (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Deduce function attributes on SCC (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,SROA on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Early CSE w/ MemorySSA on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Speculatively execute instructions if target has divergent branches on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Jump Threading on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Value Propagation on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Tail Call Elimination on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Reassociate expressions on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Rotate Loops on loop,0.4571428571428572
+ext0.cpp,Loop Invariant Code Motion on loop,0.4571428571428572
+ext0.cpp,Unswitch loops on loop,0.4571428571428572
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4571428571428572
+ext0.cpp,Induction Variable Simplification on loop,0.4571428571428572
+ext0.cpp,Recognize loop idioms on loop,0.4571428571428572
+ext0.cpp,Delete dead loops on loop,0.4571428571428572
+ext0.cpp,Unroll loops on loop,0.4
+ext0.cpp,MergedLoadStoreMotion on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Global Value Numbering on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,MemCpy Optimization on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Sparse Conditional Constant Propagation on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Bit-Tracking Dead Code Elimination on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Jump Threading on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Value Propagation on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Dead Store Elimination on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Aggressive Dead Code Elimination on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Remove unused exception handling info on SCC (llvm.dbg.declare),0.4
+ext0.cpp,Function Integration/Inlining on SCC (llvm.dbg.declare),0.4
+ext0.cpp,Deduce function attributes on SCC (llvm.dbg.declare),0.4
+ext0.cpp,Remove unused exception handling info on SCC (llvm.lifetime.start.p0i8),0.4
+ext0.cpp,Function Integration/Inlining on SCC (llvm.lifetime.start.p0i8),0.4
+ext0.cpp,Deduce function attributes on SCC (llvm.lifetime.start.p0i8),0.4
+ext0.cpp,Remove unused exception handling info on SCC (llvm.lifetime.end.p0i8),0.4
+ext0.cpp,Function Integration/Inlining on SCC (llvm.lifetime.end.p0i8),0.4
+ext0.cpp,Deduce function attributes on SCC (llvm.lifetime.end.p0i8),0.4
+ext0.cpp,Remove unused exception handling info on SCC (llvm.dbg.value),0.4
+ext0.cpp,Function Integration/Inlining on SCC (llvm.dbg.value),0.4
+ext0.cpp,Deduce function attributes on SCC (llvm.dbg.value),0.4
+ext0.cpp,Remove unused exception handling info on SCC (<<null function>>),0.4
+ext0.cpp,Function Integration/Inlining on SCC (<<null function>>),0.4
+ext0.cpp,Deduce function attributes on SCC (<<null function>>),0.4
+ext0.cpp,Deduce function attributes in RPO on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Float to int on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Loop Distribution on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Loop Vectorization on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Loop Load Elimination on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,SLP Vectorizer on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Combine redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Warn about non-applied transformations on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Alignment from assumptions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Strip Unused Function Prototypes on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Merge Duplicate Global Constants on module (/home/och/dev/dexter-fork/lto/mash/ext0.cpp),0.4
+ext0.cpp,Remove redundant instructions on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Hoist/decompose integer division and remainder on function (_Z9sum_rangeiPPc),0.4
+ext0.cpp,Simplify the CFG on function (_Z9sum_rangeiPPc),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,SROA on function (main),0.4
+main.cpp,Early CSE on function (main),0.4
+main.cpp,Infer set function attributes on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Interprocedural Sparse Conditional Constant Propagation on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Called Value Propagation on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Promote Memory to Register on function (main),0.4
+main.cpp,Dead Argument Elimination on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,Remove unused exception handling info on SCC (<<null function>>),0.4
+main.cpp,Function Integration/Inlining on SCC (<<null function>>),0.4
+main.cpp,Deduce function attributes on SCC (<<null function>>),0.4
+main.cpp,Remove unused exception handling info on SCC (_Z9somethingv),0.4
+main.cpp,Function Integration/Inlining on SCC (_Z9somethingv),0.4
+main.cpp,Deduce function attributes on SCC (_Z9somethingv),0.4
+main.cpp,Remove unused exception handling info on SCC (_Z9sum_rangeiPPc),0.4
+main.cpp,Function Integration/Inlining on SCC (_Z9sum_rangeiPPc),0.4
+main.cpp,Deduce function attributes on SCC (_Z9sum_rangeiPPc),0.4
+main.cpp,Remove unused exception handling info on SCC (main),0.4
+main.cpp,Function Integration/Inlining on SCC (main),0.4
+main.cpp,Deduce function attributes on SCC (main),0.4
+main.cpp,SROA on function (main),0.4
+main.cpp,Early CSE w/ MemorySSA on function (main),0.4
+main.cpp,Speculatively execute instructions if target has divergent branches on function (main),0.4
+main.cpp,Jump Threading on function (main),0.4
+main.cpp,Value Propagation on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Tail Call Elimination on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,Reassociate expressions on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,MergedLoadStoreMotion on function (main),0.4
+main.cpp,Global Value Numbering on function (main),0.4
+main.cpp,MemCpy Optimization on function (main),0.4
+main.cpp,Sparse Conditional Constant Propagation on function (main),0.4
+main.cpp,Bit-Tracking Dead Code Elimination on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Jump Threading on function (main),0.4
+main.cpp,Value Propagation on function (main),0.4
+main.cpp,Dead Store Elimination on function (main),0.4
+main.cpp,Aggressive Dead Code Elimination on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Remove unused exception handling info on SCC (llvm.dbg.value),0.4
+main.cpp,Function Integration/Inlining on SCC (llvm.dbg.value),0.4
+main.cpp,Deduce function attributes on SCC (llvm.dbg.value),0.4
+main.cpp,Remove unused exception handling info on SCC (<<null function>>),0.4
+main.cpp,Function Integration/Inlining on SCC (<<null function>>),0.4
+main.cpp,Deduce function attributes on SCC (<<null function>>),0.4
+main.cpp,Deduce function attributes in RPO on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Global Variable Optimizer on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Float to int on function (main),0.4
+main.cpp,Loop Distribution on function (main),0.4
+main.cpp,Loop Vectorization on function (main),0.4
+main.cpp,Loop Load Elimination on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4
+main.cpp,SLP Vectorizer on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Combine redundant instructions on function (main),0.4
+main.cpp,Warn about non-applied transformations on function (main),0.4
+main.cpp,Alignment from assumptions on function (main),0.4
+main.cpp,Strip Unused Function Prototypes on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Dead Global Elimination on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Merge Duplicate Global Constants on module (/home/och/dev/dexter-fork/lto/mash/main.cpp),0.4
+main.cpp,Remove redundant instructions on function (main),0.4
+main.cpp,Hoist/decompose integer division and remainder on function (main),0.4
+main.cpp,Simplify the CFG on function (main),0.4

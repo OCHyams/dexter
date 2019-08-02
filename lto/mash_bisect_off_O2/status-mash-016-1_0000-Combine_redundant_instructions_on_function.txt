@@ -1,0 +1,129 @@
+running pass 16/150 on "ext1.cpp" [16/583]: (1.0000) +0.0000 Combine redundant instructions on function (_ZL4fn_aj)
+
+## BEGIN ##
+[1, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 9, 13, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [2, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 13, 7, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [3, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 7, 5, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [4, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 9, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [5, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 13, 11, "StopReason.STEP", "StepKind.FUNC", []]
+.   [6, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 14, 4, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   .   [7, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 7, 5, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [8, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 9, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [9, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 14, 11, "StopReason.STEP", "StepKind.FUNC", []]
+.   [10, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 15, 4, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   .   [11, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 7, 5, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [12, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 9, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [13, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 15, 11, "StopReason.STEP", "StepKind.FUNC", []]
+.   [14, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 16, 4, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   .   [15, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 7, 5, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [16, "fn_a(unsigned int)", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 9, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [17, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 16, 11, "StopReason.STEP", "StepKind.FUNC", []]
+.   [18, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 13, 7, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   [19, "something()", "/home/och/dev/dexter-fork/lto/mash/ext1.cpp", 19, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+[20, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 9, 9, "StopReason.STEP", "StepKind.FUNC", []]
+[21, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 10, 23, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [22, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 16, 7, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [23, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 29, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   .   [24, "range<0, 5>::begin() const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 10, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   .   [25, "iterator::iterator(int)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 3, 32, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [26, "range<0, 5>::begin() const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 10, 28, "StopReason.STEP", "StepKind.FUNC", []]
+.   [27, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [28, "range<0, 5>::end() const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 11, 33, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   .   [29, "iterator::iterator(int)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 3, 32, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   .   [30, "range<0, 5>::end() const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 11, 26, "StopReason.STEP", "StepKind.FUNC", []]
+.   [31, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [32, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [33, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [34, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.BREAKPOINT", "StepKind.SAME", []]
+.   .   [35, "iterator::operator*()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 5, 28, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [36, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.FUNC", []]
+.   [37, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [38, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   .   [39, "iterator::operator++()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 6, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [40, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [41, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [42, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [43, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.BREAKPOINT", "StepKind.SAME", []]
+.   .   [44, "iterator::operator*()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 5, 28, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [45, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.FUNC", []]
+.   [46, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [47, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   .   [48, "iterator::operator++()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 6, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [49, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [50, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [51, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [52, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.BREAKPOINT", "StepKind.SAME", []]
+.   .   [53, "iterator::operator*()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 5, 28, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [54, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.FUNC", []]
+.   [55, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [56, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   .   [57, "iterator::operator++()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 6, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [58, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [59, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [60, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [61, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.BREAKPOINT", "StepKind.SAME", []]
+.   .   [62, "iterator::operator*()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 5, 28, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [63, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.FUNC", []]
+.   [64, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [65, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   .   [66, "iterator::operator++()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 6, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [67, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [68, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [69, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [70, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.BREAKPOINT", "StepKind.SAME", []]
+.   .   [71, "iterator::operator*()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 5, 28, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [72, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 22, "StopReason.STEP", "StepKind.FUNC", []]
+.   [73, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 18, 14, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+.   [74, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.BACKWARD", []]
+.   .   [75, "iterator::operator++()", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 6, 35, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [76, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   .   [77, "iterator::operator!=(iterator const&) const", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 4, 55, "StopReason.BREAKPOINT", "StepKind.FUNC", []]
+.   [78, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 17, 27, "StopReason.STEP", "StepKind.FUNC", []]
+.   [79, "sum_range(int, char**)", "/home/och/dev/dexter-fork/lto/mash/ext0.cpp", 19, 10, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+[80, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 10, 9, "StopReason.STEP", "StepKind.FUNC", []]
+[81, "main", "/home/och/dev/dexter-fork/lto/mash/main.cpp", 11, 5, "StopReason.BREAKPOINT", "StepKind.FORWARD", []]
+## END (81 steps) ##
+
+
+  ext0.cpp:18 [argc] [0/7]
+    expected encountered values:
+      1
+
+  ext0.cpp:18 [elem] [0/21]
+    expected encountered values:
+      0
+      1
+      2
+      3
+      4
+
+  ext0.cpp:18 [total] [0/21]
+    expected encountered values:
+      0
+      1
+      3
+      6
+
+  ext1.cpp:7 [i] [0/21]
+    expected encountered values:
+      0
+      1
+      2
+      7
+
+  ext1.cpp:9 [i] [0/21]
+    expected encountered values:
+      0
+      1
+      2
+
+  main.cpp:11 [a] [0/7]
+    expected encountered values:
+      0
+
+  main.cpp:11 [b] [0/7]
+    expected encountered values:
+      10
+
+
+

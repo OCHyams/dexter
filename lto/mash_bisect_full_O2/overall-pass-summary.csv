@@ -1,0 +1,47 @@
+Pass,Kind,Sum,Min,Max,Interesting
+Unroll loops,loop,-0.05714285714285716,-0.05714285714285716,-0.05714285714285716,True,-0.05714285714285716
+Function Integration/Inlining,SCC,0.02857142857142858,0.0,0.02857142857142858,True,0.0,0.02857142857142858,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Simplify the CFG,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Combine redundant instructions,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Deduce function attributes,SCC,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Remove unused exception handling info,SCC,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Jump Threading,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+SROA,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Value Propagation,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Aggressive Dead Code Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Bit-Tracking Dead Code Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Dead Store Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Early CSE,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Early CSE w/ MemorySSA,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Global Value Numbering,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+MemCpy Optimization,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+MergedLoadStoreMotion,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Promote Memory to Register,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Reassociate expressions,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Sparse Conditional Constant Propagation,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Speculatively execute instructions if target has divergent branches,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Tail Call Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Dead Global Elimination,module,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0
+Global Variable Optimizer,module,0.0,0.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0
+Alignment from assumptions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Float to int,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Hoist/decompose integer division and remainder,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Distribution,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Load Elimination,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Loop Vectorization,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Remove redundant instructions,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+SLP Vectorizer,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Warn about non-applied transformations,function,0.0,0.0,0.0,False,0.0,0.0,0.0
+Called Value Propagation,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Dead Argument Elimination,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Deduce function attributes in RPO,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Infer set function attributes,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Interprocedural Sparse Conditional Constant Propagation,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Merge Duplicate Global Constants,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Strip Unused Function Prototypes,module,0.0,0.0,0.0,False,0.0,0.0,0.0
+Delete dead loops,loop,0.0,0.0,0.0,False,0.0
+Induction Variable Simplification,loop,0.0,0.0,0.0,False,0.0
+Loop Invariant Code Motion,loop,0.0,0.0,0.0,False,0.0
+Recognize loop idioms,loop,0.0,0.0,0.0,False,0.0
+Rotate Loops,loop,0.0,0.0,0.0,False,0.0
+Unswitch loops,loop,0.0,0.0,0.0,False,0.0
