@@ -28,6 +28,7 @@ Python code being embedded within DExTer commands.
 import unittest
 
 from collections import defaultdict
+from enum import Enum
 
 from dex.utils.Exceptions import CommandParseError
 
@@ -164,6 +165,106 @@ def _find_end_of_command(line, start, paren_balance) -> (int, int):
             break
     end += 1
     return (end, paren_balance)
+
+
+class Token():
+    class Type(Enum):
+        # We only care about these few tokens because we are just trying to
+        # find valid command calls. Anything else will be parsed by eval()
+        COMMAND = 0  # Valid command name
+        LPAREN = 1      # (
+        RPAREN = 2      # )
+        HSPACE = 3      # horizontal whitespace
+        VSPACE = 4      # vertical whitespace
+        END = 5         #6 end
+
+    def __init__(self, token_type, line, start, end):
+        self.token_type = token_type
+        self.start = start
+        self.end = end
+        self.line = line
+
+    def at_point(token_type, point, span = 0):
+        return Token(token_type, point.line, point.char, point.char + span)
+
+    def get_slice(lines):
+        return lines[self.line][self.start:self.end]
+
+
+class TextPoint():
+    def __init__(self, line, char):
+        self.line = line
+        self.char = char
+
+    def next_line(self):
+        self.line += 1
+
+    def next_char(self):
+        self.char += 1
+
+    def is_end_of_line(self, lines):
+        return self.char >= len(lines[self.line])
+
+    def is_end_of_text(self, lines):
+        return self.line >= len(lines)
+
+    def getch(self, lines):
+        return lines[self.line][self.char]
+
+    def get_line_slice(self, lines, end):
+        return lines[self.line][self.char:end]
+
+
+def eat_hspace(lines, point) -> int:
+    start = point.char
+    while not point.is_end_of_line(lines) and point.getch().isspace():
+        point.next_char()
+    return point.char - start
+
+
+def eat_identifier(lines, point) -> int:
+    start = point.char
+    while not point.is_end_of_line(lines):
+        char = point.getch()
+        if not (char.isalnum() or char == '_'):
+           continue
+        point.next_char()
+    return point.char - start
+
+
+def eat_str(lines, point, string) -> int:
+    start = point.char
+    end = point.char + len(string)
+    if (end < len(lines[point.line])
+    and point.get_line_slice(lines, end) == string):
+        point.char = end
+    return point.char - start
+
+
+def get_next_token(lines, point) -> Token:
+    if point.is_end_of_text(lines):
+        return Token.at_point(Token.Type.END, point)
+
+    if point.is_end_of_line(lines):
+        tok = Token.at_point(Token.Type.VSPACE, point)
+        point.next_line()
+        return tok
+
+    span = eat_hspace(lines, point)
+    if span:
+        return Token(
+            Token.Type.HSPACE, point.line, point.char - span, point.char)
+
+    if eat_str(lines, point, '('):
+        return Token.at_point(Token.Type.LPAREN, point, -1)
+
+    if eat_str(lines, point, ')'):
+        return Token.at_point(Token.Type.RPAREN, point, -1)
+
+    span = eat_identifier(lines, point)
+    if span:##@@these can be .at_point @@make sure this is all good.
+        return Token(Token.Type.COMMAND, point.line, point.char - span, point.char)
+
 
 
 def _find_all_commands_in_file(path, file_lines, valid_commands):
