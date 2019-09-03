@@ -24,3 +24,4 @@ int main()
 // main, func, func, func
 // DexExpectStepKind('FUNC', 4)
 // DexExpectStepKind('BACKWARD', 0)
+// DexExpectStepKind('FORWARD', 6)
