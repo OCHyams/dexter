@@ -57,12 +57,3 @@ class LocIR:
             return self.column > rhs.column
 
         return self.lineno > rhs.lineno
-
-    def before_line(self, other):
-        return self.lineno < other.lineno
-
-    def after_line(self, other):
-        return self.lineno > other.lineno
-
-    def same_line(self, other):
-        return self.lineno == other.lineno

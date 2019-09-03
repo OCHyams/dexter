@@ -10,15 +10,16 @@
 // RUN:     | FileCheck %s
 // CHECK: recursive:
 
-int func(int i) {
+void func(int i) {
     if (i > 1)
-        return i + func(i - 1);
-    return i;
+        func(i - 1);
+    return;
 }
 
 int main()
 {
-    return func(3);
+    func(3);
+    return 0;
 }
 
 // main, func, func, func

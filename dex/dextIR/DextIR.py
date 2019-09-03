@@ -119,13 +119,13 @@ class DextIR:
             frame_step = self._get_prev_step_in_this_frame(step)
             prev_step = frame_step if frame_step is not None else prev_step
 
-        if prev_step.current_location.same_line(step.current_location):
+        if prev_step.current_location == step.current_location:
             return StepKind.SAME
 
-        if prev_step.current_location.after_line(step.current_location):
+        if prev_step.current_location > step.current_location:
             return StepKind.BACKWARD
 
-        if prev_step.current_location.before_line(step.current_location):
+        if prev_step.current_location < step.current_location:
             return StepKind.FORWARD
 
     def new_step(self, context, step):
