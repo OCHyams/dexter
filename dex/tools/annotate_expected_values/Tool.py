@@ -42,14 +42,15 @@ class ExpectedWatchValue(object):
         self.last_value_seen = start_value
 
     def __eq__(self, other):
-        return (self.file_path == other.file_path
-                and self.expression == other.expression
-                and self.from_line == other.from_line
-                and self.to_line == other.to_line)
+        return (
+            self.file_path == other.file_path
+            and self.expression == other.expression
+            and self.from_line == other.from_line
+            and self.to_line == other.to_line
+        )
 
     def __hash__(self):
-        return hash((self.file_path, self.expression, self.from_line,
-                     self.to_line))
+        return hash((self.file_path, self.expression, self.from_line, self.to_line))
 
     def add_value(self, value, line_seen):
         if line_seen < self.from_line:
@@ -65,18 +66,19 @@ class ExpectedWatchValue(object):
         self.last_line_seen = line_seen
 
     def is_out_of_range(self, lineno):
-        return ((lineno < self.from_line - 1 or lineno > self.to_line + 1)
-                and abs(lineno - self.last_line_seen) > 2)
+        return (lineno < self.from_line - 1 or lineno > self.to_line + 1) and abs(
+            lineno - self.last_line_seen
+        ) > 2
 
     def __str__(self):
         if self.from_line == self.to_line:
-            from_to = 'on_line={}'.format(self.from_line)
+            from_to = "on_line={}".format(self.from_line)
         else:
-            from_to = 'from_line={}, to_line={}'.format(
-                self.from_line, self.to_line)
+            from_to = "from_line={}, to_line={}".format(self.from_line, self.to_line)
 
-        return ("// DexExpectWatchValue('{}', {}, {})".format(
-            self.expression, ', '.join(str(v) for v in self.values), from_to))
+        return "// DexExpectWatchValue('{}', {}, {})".format(
+            self.expression, ", ".join(str(v) for v in self.values), from_to
+        )
 
 
 class ExpectedStepKind(object):
@@ -101,33 +103,33 @@ class Tool(ToolBase):
 
     @property
     def name(self):
-        return 'DExTer annotate expected values'
+        return "DExTer annotate expected values"
 
     def add_tool_arguments(self, parser, defaults):
         parser.description = Tool.__doc__
         parser.add_argument(
-            'dextIR_file',
-            metavar='dextIR-file',
+            "dextIR_file",
+            metavar="dextIR-file",
             type=str,
-            help='dexter dextIR file to read')
+            help="dexter dextIR file to read",
+        )
         parser.add_argument(
-            'source_files',
-            metavar='source-file',
+            "source_files",
+            metavar="source-file",
             type=str,
-            nargs='+',
-            help='source files to annotate')
+            nargs="+",
+            help="source files to annotate",
+        )
 
     def handle_options(self, defaults):
         options = self.context.options
 
         options.dextIR_file = os.path.abspath(options.dextIR_file)
         if not os.path.isfile(options.dextIR_file):
-            raise Error('<d>could not find</> <r>"{}"</>'.format(
-                options.dextIR_file))
+            raise Error('<d>could not find</> <r>"{}"</>'.format(options.dextIR_file))
 
         options.source_files = [
-            os.path.normcase(os.path.abspath(sf))
-            for sf in options.source_files
+            os.path.normcase(os.path.abspath(sf)) for sf in options.source_files
         ]
         for sf in options.source_files:
             if not os.path.isfile(sf):
@@ -144,10 +146,10 @@ class Tool(ToolBase):
         for step_kind in StepKind:
             step_kinds.append(ExpectedStepKind(step_kind, 0))
 
-        with open(options.dextIR_file, 'rb') as fp:
+        with open(options.dextIR_file, "rb") as fp:
             step_collection = pickle.load(fp)
 
-        for step in getattr(step_collection, 'steps'):
+        for step in getattr(step_collection, "steps"):
             lineno = step.current_location.lineno
 
             for step_kind in step_kinds:
@@ -159,7 +161,7 @@ class Tool(ToolBase):
                     continue
 
                 found_exp_val = False
-                is_pointer = value_info.value.startswith('0x')
+                is_pointer = value_info.value.startswith("0x")
 
                 for exp_value in exp_values:
                     if exp_value.expression == value_info.expression:
@@ -167,14 +169,16 @@ class Tool(ToolBase):
                             exp_values.add(
                                 ExpectedWatchValue(
                                     step.current_location.path,
-                                    value_info.expression, "'{}'".format(
-                                        value_info.value), lineno))
+                                    value_info.expression,
+                                    "'{}'".format(value_info.value),
+                                    lineno,
+                                )
+                            )
                             found_exp_val = True
                             break
 
                         if not is_pointer:
-                            exp_value.add_value(
-                                "'{}'".format(value_info.value), lineno)
+                            exp_value.add_value("'{}'".format(value_info.value), lineno)
 
                         found_exp_val = True
                         break
@@ -182,33 +186,40 @@ class Tool(ToolBase):
                 if not found_exp_val:
                     exp_values.add(
                         ExpectedWatchValue(
-                            step.current_location.path, value_info.expression,
-                            "'{}'".format(value_info.value), lineno))
+                            step.current_location.path,
+                            value_info.expression,
+                            "'{}'".format(value_info.value),
+                            lineno,
+                        )
+                    )
 
         for source_file in options.source_files:
-            with open(source_file, 'a') as fp:
+            with open(source_file, "a") as fp:
                 exp_values_trimmed = [
                     v for v in exp_values if v.file_path == source_file
                 ]
 
                 if exp_values_trimmed:
-                    fp.write('\n\n')
+                    fp.write("\n\n")
 
                     prev_from_line = -1
                     for exp_value in sorted(
-                            exp_values_trimmed,
-                            key=lambda v: (v.from_line, v.expression)):
+                        exp_values_trimmed, key=lambda v: (v.from_line, v.expression)
+                    ):
                         if exp_value.from_line != prev_from_line:
-                            fp.write('\n')
+                            fp.write("\n")
                             prev_from_line = exp_value.from_line
-                        fp.write('\n{}'.format(exp_value))
+                        fp.write("\n{}".format(exp_value))
 
-        with open(options.source_files[0], 'a') as fp:
+        with open(options.source_files[0], "a") as fp:
             if step_kinds:
-                fp.write('\n\n')
+                fp.write("\n\n")
 
                 for step_kind in step_kinds:
-                    fp.write("\n// DexExpectStepKind('{}', {})".format(
-                        step_kind.name, step_kind.count))
+                    fp.write(
+                        "\n// DexExpectStepKind('{}', {})".format(
+                            step_kind.name, step_kind.count
+                        )
+                    )
 
         return ReturnCode.OK

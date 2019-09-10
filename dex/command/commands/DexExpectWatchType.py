@@ -25,6 +25,7 @@
 
 from dex.command.commands.DexExpectWatchBase import DexExpectWatchBase
 
+
 class DexExpectWatchType(DexExpectWatchBase):
     """Expect the expression `expr` to evaluate be evaluated and have each
     evaluation's type checked against the list of `types`.
@@ -34,6 +35,7 @@ class DexExpectWatchType(DexExpectWatchBase):
 
     See Commands.md for more info.
     """
+
     @staticmethod
     def get_name():
         return __class__.__name__

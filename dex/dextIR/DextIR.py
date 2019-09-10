@@ -52,13 +52,15 @@ class DextIR:
         commands: { name (str), commands (list[CommandIR])
     """
 
-    def __init__(self,
-                 dexter_version: str,
-                 executable_path: str,
-                 source_paths: List[str],
-                 builder: BuilderIR = None,
-                 debugger: DebuggerIR = None,
-                 commands: OrderedDict = None):
+    def __init__(
+        self,
+        dexter_version: str,
+        executable_path: str,
+        source_paths: List[str],
+        builder: BuilderIR = None,
+        debugger: DebuggerIR = None,
+        commands: OrderedDict = None,
+    ):
         self.dexter_version = dexter_version
         self.executable_path = executable_path
         self.source_paths = source_paths
@@ -68,18 +70,22 @@ class DextIR:
         self.steps: List[StepIR] = []
 
     def __str__(self):
-        colors = 'rgby'
-        st = '## BEGIN ##\n'
+        colors = "rgby"
+        st = "## BEGIN ##\n"
         color_idx = 0
         for step in self.steps:
-            if step.step_kind in (StepKind.FUNC, StepKind.FUNC_EXTERNAL,
-                                  StepKind.FUNC_UNKNOWN):
+            if step.step_kind in (
+                StepKind.FUNC,
+                StepKind.FUNC_EXTERNAL,
+                StepKind.FUNC_UNKNOWN,
+            ):
                 color_idx += 1
 
             color = colors[color_idx % len(colors)]
-            st += '<{}>{}</>\n'.format(color, step)
-        st += '## END ({} step{}) ##\n'.format(
-            self.num_steps, '' if self.num_steps == 1 else 's')
+            st += "<{}>{}</>\n".format(color, step)
+        st += "## END ({} step{}) ##\n".format(
+            self.num_steps, "" if self.num_steps == 1 else "s"
+        )
         return st
 
     @property

@@ -81,8 +81,7 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
 
     @property
     def loading_error(self):
-        return (str(self._loading_error[1])
-                if self._loading_error is not None else None)
+        return str(self._loading_error[1]) if self._loading_error is not None else None
 
     @property
     def loading_error_trace(self):
@@ -93,33 +92,33 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
 
         if self._loading_error[1].orig_exception is not None:
             orig_exception = traceback.format_exception(
-                *self._loading_error[1].orig_exception)
+                *self._loading_error[1].orig_exception
+            )
 
-            if ''.join(orig_exception) not in ''.join(tb):
-                tb.extend(['\n'])
+            if "".join(orig_exception) not in "".join(tb):
+                tb.extend(["\n"])
                 tb.extend(orig_exception)
 
-        tb = ''.join(tb).splitlines(True)
+        tb = "".join(tb).splitlines(True)
         return tb
 
     def add_breakpoints(self):
         for s in self.context.options.source_files:
-            with open(s, 'r') as fp:
+            with open(s, "r") as fp:
                 num_lines = len(fp.readlines())
             for line in range(1, num_lines + 1):
                 self.add_breakpoint(s, line)
 
     def _update_step_watches(self, step_info):
         loc = step_info.current_location
-        watch_cmds = ['DexUnreachable', 'DexExpectStepOrder']
-        towatch = chain.from_iterable(self.steps.commands[x]
-                                      for x in watch_cmds
-                                      if x in self.steps.commands)
+        watch_cmds = ["DexUnreachable", "DexExpectStepOrder"]
+        towatch = chain.from_iterable(
+            self.steps.commands[x] for x in watch_cmds if x in self.steps.commands
+        )
         try:
             # Iterate over all watches of the types named in watch_cmds
             for watch in towatch:
-                if (watch.path == loc.path
-                        and watch.lineno == loc.lineno):
+                if watch.path == loc.path and watch.lineno == loc.lineno:
                     result = watch.eval(self)
                     step_info.watches.update(result)
                     break
@@ -155,9 +154,9 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
                 self._update_step_watches(step_info)
                 self.steps.new_step(self.context, step_info)
 
-            if (step_info.current_frame
-                    and (step_info.current_location.path in
-                         self.context.options.source_files)):
+            if step_info.current_frame and (
+                step_info.current_location.path in self.context.options.source_files
+            ):
                 self.step()
             else:
                 self.go()
@@ -165,7 +164,9 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
             time.sleep(self.context.options.pause_between_steps)
         else:
             raise DebuggerException(
-                'maximum number of steps reached ({})'.format(max_steps))
+                "maximum number of steps reached ({})".format(max_steps)
+            )
+
     @abc.abstractmethod
     def _load_interface(self):
         pass

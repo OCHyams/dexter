@@ -31,7 +31,7 @@ class DexLabel(CommandBase):
     def __init__(self, label):
 
         if not isinstance(label, str):
-            raise TypeError('invalid argument type')
+            raise TypeError("invalid argument type")
 
         self._label = label
         super(DexLabel, self).__init__()

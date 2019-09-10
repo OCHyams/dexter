@@ -37,14 +37,16 @@ from dex.utils.ReturnCode import ReturnCode
 def _load_com_module():
     try:
         module_info = imp.find_module(
-            'ComInterface',
-            [os.path.join(os.path.dirname(__file__), 'windows')])
-        return imp.load_module('ComInterface', *module_info)
+            "ComInterface", [os.path.join(os.path.dirname(__file__), "windows")]
+        )
+        return imp.load_module("ComInterface", *module_info)
     except ImportError as e:
         raise LoadDebuggerException(e, sys.exc_info())
 
 
-class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abstract-method
+class VisualStudio(
+    DebuggerBase, metaclass=abc.ABCMeta
+):  # pylint: disable=abstract-method
 
     # Constants for results of Debugger.CurrentMode
     # (https://msdn.microsoft.com/en-us/library/envdte.debugger.currentmode.aspx)
@@ -65,18 +67,17 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
             self._debugger = self._interface.Debugger
             self._debugger.HexDisplayMode = False
 
-            self._interface.MainWindow.Visible = (
-                self.context.options.show_debugger)
+            self._interface.MainWindow.Visible = self.context.options.show_debugger
 
             self._solution = self._interface.Solution
-            self._solution.Create(self.context.working_directory.path,
-                                  'DexterSolution')
+            self._solution.Create(self.context.working_directory.path, "DexterSolution")
 
             try:
                 self._solution.AddFromFile(self._project_file)
             except OSError:
                 raise LoadDebuggerException(
-                    'could not debug the specified executable', sys.exc_info())
+                    "could not debug the specified executable", sys.exc_info()
+                )
 
             self._fn_step = self._debugger.StepInto
             self._fn_go = self._debugger.Go
@@ -100,9 +101,9 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
     def _location(self):
         bp = self._debugger.BreakpointLastHit
         return {
-            'path': getattr(bp, 'File', None),
-            'lineno': getattr(bp, 'FileLine', None),
-            'column': getattr(bp, 'FileColumn', None)
+            "path": getattr(bp, "File", None),
+            "lineno": getattr(bp, "FileLine", None),
+            "column": getattr(bp, "FileColumn", None),
         }
 
     @property
@@ -125,7 +126,7 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
             bp.Delete()
 
     def add_breakpoint(self, file_, line):
-        self._debugger.Breakpoints.Add('', file_, line)
+        self._debugger.Breakpoints.Add("", file_, line)
 
     def launch(self):
         self.step()
@@ -144,8 +145,11 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
             stack_frame = stack_frames[idx]
             self._debugger.CurrentStackFrame = stack_frame.raw
         except IndexError:
-            raise Error('attempted to access stack frame {} out of {}'
-                .format(idx, len(stack_frames)))
+            raise Error(
+                "attempted to access stack frame {} out of {}".format(
+                    idx, len(stack_frames)
+                )
+            )
 
     def get_step_info(self):
         thread = self._debugger.CurrentThread
@@ -154,26 +158,23 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
         frames = []
         state_frames = []
 
-
         for idx, sf in enumerate(stackframes):
             frame = FrameIR(
                 function=self._sanitize_function_name(sf.FunctionName),
-                is_inlined=sf.FunctionName.startswith('[Inline Frame]'),
-                loc=LocIR(path=None, lineno=None, column=None))
+                is_inlined=sf.FunctionName.startswith("[Inline Frame]"),
+                loc=LocIR(path=None, lineno=None, column=None),
+            )
 
-            fname = frame.function or ''  # pylint: disable=no-member
+            fname = frame.function or ""  # pylint: disable=no-member
             if any(name in fname for name in self.frames_below_main):
                 break
 
-
-            state_frame = StackFrame(function=frame.function,
-                                     is_inlined=frame.is_inlined,
-                                     watches={})
+            state_frame = StackFrame(
+                function=frame.function, is_inlined=frame.is_inlined, watches={}
+            )
 
             for watch in self.watches:
-                state_frame.watches[watch] = self.evaluate_expression(
-                    watch, idx)
-
+                state_frame.watches[watch] = self.evaluate_expression(watch, idx)
 
             state_frames.append(state_frame)
             frames.append(frame)
@@ -190,8 +191,11 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
         program_state = ProgramState(frames=state_frames)
 
         return StepIR(
-            step_index=self.step_index, frames=frames, stop_reason=reason,
-            program_state=program_state)
+            step_index=self.step_index,
+            frames=frames,
+            stop_reason=reason,
+            program_state=program_state,
+        )
 
     @property
     def is_running(self):
@@ -204,8 +208,10 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
     @property
     def frames_below_main(self):
         return [
-            '[Inline Frame] invoke_main', '__scrt_common_main_seh',
-            '__tmainCRTStartup', 'mainCRTStartup'
+            "[Inline Frame] invoke_main",
+            "__scrt_common_main_seh",
+            "__tmainCRTStartup",
+            "mainCRTStartup",
         ]
 
     def evaluate_expression(self, expression, frame_idx=0) -> ValueIR:
@@ -214,20 +220,19 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
         self.set_current_stack_frame(0)
         value = result.Value
 
-        is_optimized_away = any(s in value for s in [
-            'Variable is optimized away and not available',
-            'Value is not available, possibly due to optimization',
-        ])
+        is_optimized_away = any(
+            s in value
+            for s in [
+                "Variable is optimized away and not available",
+                "Value is not available, possibly due to optimization",
+            ]
+        )
 
-        is_irretrievable = any(s in value for s in [
-            '???',
-            '<Unable to read memory>',
-        ])
+        is_irretrievable = any(s in value for s in ["???", "<Unable to read memory>"])
 
         # an optimized away value is still counted as being able to be
         # evaluated.
-        could_evaluate = (result.IsValidValue or is_optimized_away
-                          or is_irretrievable)
+        could_evaluate = result.IsValidValue or is_optimized_away or is_irretrievable
 
         return ValueIR(
             expression=expression,

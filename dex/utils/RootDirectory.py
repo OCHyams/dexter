@@ -26,6 +26,6 @@ import os
 
 
 def get_root_directory():
-    root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    assert os.path.basename(root) == 'dex', root
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    assert os.path.basename(root) == "dex", root
     return root

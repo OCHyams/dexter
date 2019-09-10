@@ -41,21 +41,19 @@ class Tool(ToolBase):
 
     @property
     def name(self):
-        return 'DExTer run debugger internal'
+        return "DExTer run debugger internal"
 
     def add_tool_arguments(self, parser, defaults):
-        parser.add_argument('dextIR_path', type=str, help='dextIR file')
-        parser.add_argument(
-            'pickled_options', type=str, help='pickled options file')
+        parser.add_argument("dextIR_path", type=str, help="dextIR file")
+        parser.add_argument("pickled_options", type=str, help="pickled options file")
 
     def handle_options(self, defaults):
-        with open(self.context.options.dextIR_path, 'rb') as fp:
+        with open(self.context.options.dextIR_path, "rb") as fp:
             self.dextIR = pickle.load(fp)
 
-        with open(self.context.options.pickled_options, 'rb') as fp:
+        with open(self.context.options.pickled_options, "rb") as fp:
             poptions = pickle.load(fp)
-            poptions.working_directory = (
-                self.context.options.working_directory[:])
+            poptions.working_directory = self.context.options.working_directory[:]
             poptions.unittest = self.context.options.unittest
             poptions.dextIR_path = self.context.options.dextIR_path
             self.context.options = poptions
@@ -65,18 +63,19 @@ class Tool(ToolBase):
     def go(self) -> ReturnCode:
         options = self.context.options
 
-        with Timer('loading debugger'):
-            debugger = Debuggers(self.context).load(options.debugger,
-                                                    self.dextIR)
+        with Timer("loading debugger"):
+            debugger = Debuggers(self.context).load(options.debugger, self.dextIR)
             self.dextIR.debugger = debugger.debugger_info
 
-        with Timer('running debugger'):
+        with Timer("running debugger"):
             if not debugger.is_available:
-                msg = '<d>could not load {}</> ({})\n'.format(
-                    debugger.name, debugger.loading_error)
+                msg = "<d>could not load {}</> ({})\n".format(
+                    debugger.name, debugger.loading_error
+                )
                 if options.verbose:
-                    msg = '{}\n    {}'.format(
-                        msg, '    '.join(debugger.loading_error_trace))
+                    msg = "{}\n    {}".format(
+                        msg, "    ".join(debugger.loading_error_trace)
+                    )
                 raise Error(msg)
 
             with debugger:
@@ -85,6 +84,6 @@ class Tool(ToolBase):
                 except DebuggerException as e:
                     raise Error(e)
 
-        with open(self.context.options.dextIR_path, 'wb') as fp:
+        with open(self.context.options.dextIR_path, "wb") as fp:
             pickle.dump(self.dextIR, fp)
         return ReturnCode.OK

@@ -35,7 +35,7 @@ class WorkingDirectory(object):
         self.context = context
         self.orig_cwd = os.getcwd()
 
-        dir_ = kwargs.get('dir', None)
+        dir_ = kwargs.get("dir", None)
         if dir_ and not os.path.isdir(dir_):
             os.makedirs(dir_)
         self.path = tempfile.mkdtemp(*args, **kwargs)
@@ -47,11 +47,10 @@ class WorkingDirectory(object):
     def __exit__(self, *args):
         os.chdir(self.orig_cwd)
         if self.context.options.save_temps:
-            self.context.o.blue('"{}" left in place [--save-temps]\n'.format(
-                self.path))
+            self.context.o.blue('"{}" left in place [--save-temps]\n'.format(self.path))
             return
 
-        exception = AssertionError('should never be raised')
+        exception = AssertionError("should never be raised")
         for _ in range(100):
             try:
                 shutil.rmtree(self.path)

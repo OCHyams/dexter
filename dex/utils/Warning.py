@@ -29,6 +29,6 @@ def warn(context, msg, flag=None):
 
     msg = msg.rstrip()
     if flag:
-        msg = '{} <y>[{}]</>'.format(msg, flag)
+        msg = "{} <y>[{}]</>".format(msg, flag)
 
-    context.o.auto('warning: <d>{}</>\n'.format(msg))
+    context.o.auto("warning: <d>{}</>\n".format(msg))

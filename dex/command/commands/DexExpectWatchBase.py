@@ -35,21 +35,20 @@ from dex.command.StepValueInfo import StepValueInfo
 class DexExpectWatchBase(CommandBase):
     def __init__(self, *args, **kwargs):
         if len(args) < 2:
-            raise TypeError('expected at least two args')
+            raise TypeError("expected at least two args")
 
         self.expression = args[0]
         self.values = [str(arg) for arg in args[1:]]
         try:
-            on_line = kwargs.pop('on_line')
+            on_line = kwargs.pop("on_line")
             self._from_line = on_line
             self._to_line = on_line
         except KeyError:
-            self._from_line = kwargs.pop('from_line', 1)
-            self._to_line = kwargs.pop('to_line', 999999)
-        self._require_in_order = kwargs.pop('require_in_order', True)
+            self._from_line = kwargs.pop("from_line", 1)
+            self._to_line = kwargs.pop("to_line", 999999)
+        self._require_in_order = kwargs.pop("require_in_order", True)
         if kwargs:
-            raise TypeError('unexpected named args: {}'.format(
-                ', '.join(kwargs)))
+            raise TypeError("unexpected named args: {}".format(", ".join(kwargs)))
 
         # Number of times that this watch has been encountered.
         self.times_encountered = 0
@@ -81,7 +80,6 @@ class DexExpectWatchBase(CommandBase):
 
         super(DexExpectWatchBase, self).__init__()
 
-
     def get_watches(self):
         return [self.expression]
 
@@ -97,7 +95,6 @@ class DexExpectWatchBase(CommandBase):
     def encountered_values(self):
         return sorted(list(set(self.values) - self._missing_values))
 
-
     def resolve_label(self, label_line_pair):
         # from_line and to_line could have the same label.
         label, lineno = label_line_pair
@@ -110,8 +107,11 @@ class DexExpectWatchBase(CommandBase):
         return len(self.get_label_args()) > 0
 
     def get_label_args(self):
-        return [label for label in (self._from_line, self._to_line)
-                      if isinstance(label, str)]
+        return [
+            label
+            for label in (self._from_line, self._to_line)
+            if isinstance(label, str)
+        ]
 
     @abc.abstractmethod
     def _get_expected_field(self, watch):
@@ -149,19 +149,20 @@ class DexExpectWatchBase(CommandBase):
         """
         differences = []
         actual_values = [w.expected_value for w in actual_watches]
-        value_differences = list(difflib.Differ().compare(actual_values,
-                                                          expected_values))
+        value_differences = list(
+            difflib.Differ().compare(actual_values, expected_values)
+        )
 
         missing_value = False
         index = 0
         for vd in value_differences:
             kind = vd[0]
-            if kind == '+':
+            if kind == "+":
                 # A value that is encountered in the expected list but not in the
                 # actual list.  We'll keep a note that something is wrong and flag
                 # the next value that matches as misordered.
                 missing_value = True
-            elif kind == ' ':
+            elif kind == " ":
                 # This value is as expected.  It might still be wrong if we've
                 # previously encountered a value that is in the expected list but
                 #  not the actual list.
@@ -169,13 +170,13 @@ class DexExpectWatchBase(CommandBase):
                     missing_value = False
                     differences.append(actual_watches[index])
                 index += 1
-            elif kind == '-':
+            elif kind == "-":
                 # A value that is encountered in the actual list but not the
                 #  expected list.
                 differences.append(actual_watches[index])
                 index += 1
             else:
-                assert False, 'unexpected diff:{}'.format(vd)
+                assert False, "unexpected diff:{}".format(vd)
 
         return differences
 
@@ -183,15 +184,14 @@ class DexExpectWatchBase(CommandBase):
         for step in step_collection.steps:
             loc = step.current_location
 
-            if (loc.path == self.path and loc.lineno in self.line_range):
+            if loc.path == self.path and loc.lineno in self.line_range:
                 try:
                     watch = step.program_state.frames[0].watches[self.expression]
                 except KeyError:
                     pass
                 else:
                     expected_field = self._get_expected_field(watch)
-                    step_info = StepValueInfo(step.step_index, watch, 
-                                              expected_field)
+                    step_info = StepValueInfo(step.step_index, watch, expected_field)
                     self._handle_watch(step_info)
 
         if self._require_in_order:
@@ -204,7 +204,10 @@ class DexExpectWatchBase(CommandBase):
                     prev_value = watch.expected_value
 
             self.misordered_watches = self._check_watch_order(
-                value_change_watches, [
-                    v for v in self.values if v in
-                    [w.expected_value for w in self.expected_watches]
-                ])
+                value_change_watches,
+                [
+                    v
+                    for v in self.values
+                    if v in [w.expected_value for w in self.expected_watches]
+                ],
+            )

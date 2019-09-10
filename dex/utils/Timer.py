@@ -29,7 +29,7 @@ import time
 
 
 def _indent(indent):
-    return '| ' * indent
+    return "| " * indent
 
 
 class Timer(object):
@@ -44,17 +44,18 @@ class Timer(object):
     def __enter__(self):
         Timer.indent += 1
         if Timer.display and self.name:
-            indent = _indent(Timer.indent - 1) + ' _'
-            Timer.fn('{}\n'.format(_indent(Timer.indent - 1)))
-            Timer.fn('{} start {}\n'.format(indent, self.name))
+            indent = _indent(Timer.indent - 1) + " _"
+            Timer.fn("{}\n".format(_indent(Timer.indent - 1)))
+            Timer.fn("{} start {}\n".format(indent, self.name))
         return self
 
     def __exit__(self, *args):
         if Timer.display and self.name:
-            indent = _indent(Timer.indent - 1) + '|_'
-            Timer.fn('{} {} time taken: {:0.1f}s\n'.format(
-                indent, self.name, self.elapsed))
-            Timer.fn('{}\n'.format(_indent(Timer.indent - 1)))
+            indent = _indent(Timer.indent - 1) + "|_"
+            Timer.fn(
+                "{} {} time taken: {:0.1f}s\n".format(indent, self.name, self.elapsed)
+            )
+            Timer.fn("{}\n".format(_indent(Timer.indent - 1)))
         Timer.indent -= 1
 
     @property

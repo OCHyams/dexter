@@ -45,35 +45,35 @@ def _output_bug_report_message(context):
         user.
     """
     context.o.red(
-        '\n\n'
-        '<g>****************************************</>\n'
-        '<b>****************************************</>\n'
-        '****************************************\n'
-        '**                                    **\n'
-        '** <y>This is a bug in <a>DExTer</>.</>           **\n'
-        '**                                    **\n'
-        '**                  <y>Please report it.</> **\n'
-        '**                                    **\n'
-        '****************************************\n'
-        '<b>****************************************</>\n'
-        '<g>****************************************</>\n'
-        '\n'
-        '<b>system:</>\n'
-        '<d>{}</>\n\n'
-        '<b>version:</>\n'
-        '<d>{}</>\n\n'
-        '<b>args:</>\n'
-        '<d>{}</>\n'
-        '\n'.format(sys.platform, version('DExTer'),
-                    [sys.executable] + sys.argv),
-        stream=PrettyOutput.stderr)
+        "\n\n"
+        "<g>****************************************</>\n"
+        "<b>****************************************</>\n"
+        "****************************************\n"
+        "**                                    **\n"
+        "** <y>This is a bug in <a>DExTer</>.</>           **\n"
+        "**                                    **\n"
+        "**                  <y>Please report it.</> **\n"
+        "**                                    **\n"
+        "****************************************\n"
+        "<b>****************************************</>\n"
+        "<g>****************************************</>\n"
+        "\n"
+        "<b>system:</>\n"
+        "<d>{}</>\n\n"
+        "<b>version:</>\n"
+        "<d>{}</>\n\n"
+        "<b>args:</>\n"
+        "<d>{}</>\n"
+        "\n".format(sys.platform, version("DExTer"), [sys.executable] + sys.argv),
+        stream=PrettyOutput.stderr,
+    )
 
 
 def get_tools_directory():
     """ Returns directory path where DExTer tool imports can be
         found.
     """
-    tools_directory = os.path.join(get_root_directory(), 'tools')
+    tools_directory = os.path.join(get_root_directory(), "tools")
     assert os.path.isdir(tools_directory), tools_directory
     return tools_directory
 
@@ -82,31 +82,37 @@ def get_tool_names():
     """ Returns a list of expected DExTer Tools
     """
     return [
-        'annotate-expected-values', 'clang-opt-bisect', 'help',
-        'list-debuggers', 'no-tool-', 'run-debugger-internal-', 'test', 'view'
+        "annotate-expected-values",
+        "clang-opt-bisect",
+        "help",
+        "list-debuggers",
+        "no-tool-",
+        "run-debugger-internal-",
+        "test",
+        "view",
     ]
 
 
 def _set_auto_highlights(context):
     """Flag some strings for auto-highlighting.
     """
-    context.o.auto_reds.extend([
-        r'[Ee]rror\:',
-        r'[Ee]xception\:',
-        r'un(expected|recognized) argument',
-    ])
-    context.o.auto_yellows.extend([
-        r'[Ww]arning\:',
-        r'\(did you mean ',
-        r'During handling of the above exception, another exception',
-    ])
+    context.o.auto_reds.extend(
+        [r"[Ee]rror\:", r"[Ee]xception\:", r"un(expected|recognized) argument"]
+    )
+    context.o.auto_yellows.extend(
+        [
+            r"[Ww]arning\:",
+            r"\(did you mean ",
+            r"During handling of the above exception, another exception",
+        ]
+    )
 
 
 def _get_options_and_args(context):
     """ get the options and arguments from the commandline
     """
     parser = argparse.ExtArgumentParser(context, add_help=False)
-    parser.add_argument('tool', default=None, nargs='?')
+    parser.add_argument("tool", default=None, nargs="?")
     options, args = parser.parse_known_args(sys.argv[1:])
 
     return options, args
@@ -118,7 +124,7 @@ def _get_tool_name(options):
     """
     tool_name = options.tool
     if tool_name is None:
-        tool_name = 'no_tool_'
+        tool_name = "no_tool_"
     else:
         _is_valid_tool_name(tool_name)
     return tool_name
@@ -130,9 +136,11 @@ def _is_valid_tool_name(tool_name):
     """
     valid_tools = get_tool_names()
     if tool_name not in valid_tools:
-        raise Error('invalid tool "{}" (choose from {})'.format(
-            tool_name,
-            ', '.join([t for t in valid_tools if not t.endswith('-')])))
+        raise Error(
+            'invalid tool "{}" (choose from {})'.format(
+                tool_name, ", ".join([t for t in valid_tools if not t.endswith("-")])
+            )
+        )
 
 
 def _import_tool_module(tool_name):
@@ -140,7 +148,7 @@ def _import_tool_module(tool_name):
         tool_name.
     """
     # format tool argument to reflect tool directory form.
-    tool_name = tool_name.replace('-', '_')
+    tool_name = tool_name.replace("-", "_")
 
     tools_directory = get_tools_directory()
     module_info = imp.find_module(tool_name, [tools_directory])
@@ -158,11 +166,11 @@ def tool_main(context, tool, args):
         context.version = version(tool.name)
 
         if options.version:
-            context.o.green('{}\n'.format(context.version))
+            context.o.green("{}\n".format(context.version))
             return ReturnCode.OK
 
-        if (options.unittest != 'off' and not unit_tests_ok(context)):
-            raise Error('<d>unit test failures</>')
+        if options.unittest != "off" and not unit_tests_ok(context):
+            raise Error("<d>unit test failures</>")
 
         if options.colortest:
             context.o.colortest()
@@ -208,8 +216,7 @@ def main() -> ReturnCode:
             module = _import_tool_module(tool_name)
             return tool_main(context, module.Tool(context), args)
         except Error as e:
-            context.o.auto(
-                '\nerror: {}\n'.format(str(e)), stream=PrettyOutput.stderr)
+            context.o.auto("\nerror: {}\n".format(str(e)), stream=PrettyOutput.stderr)
             try:
                 if context.options.error_debug:
                     raise

@@ -50,7 +50,7 @@ def _get_potential_debuggers():  # noqa
     return {
         LLDB.get_option_name(): LLDB,
         VisualStudio2015.get_option_name(): VisualStudio2015,
-        VisualStudio2017.get_option_name(): VisualStudio2017
+        VisualStudio2017.get_option_name(): VisualStudio2017,
     }
 
 
@@ -58,20 +58,23 @@ def _warn_meaningless_option(context, option):
     if context.options.list_debuggers:
         return
 
-    warn(context,
-         'option <y>"{}"</> is meaningless with this debugger'.format(option),
-         '--debugger={}'.format(context.options.debugger))
+    warn(
+        context,
+        'option <y>"{}"</> is meaningless with this debugger'.format(option),
+        "--debugger={}".format(context.options.debugger),
+    )
 
 
 def add_debugger_tool_base_arguments(parser, defaults):
-    defaults.lldb_executable = 'lldb.exe' if is_native_windows() else 'lldb'
+    defaults.lldb_executable = "lldb.exe" if is_native_windows() else "lldb"
     parser.add_argument(
-        '--lldb-executable',
+        "--lldb-executable",
         type=str,
-        metavar='<file>',
+        metavar="<file>",
         default=None,
         display_default=defaults.lldb_executable,
-        help='location of LLDB executable')
+        help="location of LLDB executable",
+    )
 
 
 def add_debugger_tool_arguments(parser, context, defaults):
@@ -81,37 +84,39 @@ def add_debugger_tool_arguments(parser, context, defaults):
     add_debugger_tool_base_arguments(parser, defaults)
 
     parser.add_argument(
-        '--debugger',
+        "--debugger",
         type=str,
         choices=potential_debuggers,
         required=True,
-        help='debugger to use')
+        help="debugger to use",
+    )
     parser.add_argument(
-        '--max-steps',
-        metavar='<int>',
+        "--max-steps",
+        metavar="<int>",
         type=int,
         default=1000,
-        help='maximum number of program steps allowed')
+        help="maximum number of program steps allowed",
+    )
     parser.add_argument(
-        '--pause-between-steps',
-        metavar='<seconds>',
+        "--pause-between-steps",
+        metavar="<seconds>",
         type=float,
         default=0.0,
-        help='number of seconds to pause between steps')
+        help="number of seconds to pause between steps",
+    )
     defaults.show_debugger = False
     parser.add_argument(
-        '--show-debugger',
-        action='store_true',
-        default=None,
-        help='show the debugger')
-    defaults.arch = 'x86_64'
+        "--show-debugger", action="store_true", default=None, help="show the debugger"
+    )
+    defaults.arch = "x86_64"
     parser.add_argument(
-        '--arch',
+        "--arch",
         type=str,
-        metavar='<architecture>',
+        metavar="<architecture>",
         default=None,
         display_default=defaults.arch,
-        help='target architecture')
+        help="target architecture",
+    )
 
 
 def handle_debugger_tool_base_options(context, defaults):  # noqa
@@ -120,13 +125,14 @@ def handle_debugger_tool_base_options(context, defaults):  # noqa
     if options.lldb_executable is None:
         options.lldb_executable = defaults.lldb_executable
     else:
-        if getattr(options, 'debugger', 'lldb') != 'lldb':
-            _warn_meaningless_option(context, '--lldb-executable')
+        if getattr(options, "debugger", "lldb") != "lldb":
+            _warn_meaningless_option(context, "--lldb-executable")
 
         options.lldb_executable = os.path.abspath(options.lldb_executable)
         if not os.path.isfile(options.lldb_executable):
-            raise ToolArgumentError('<d>could not find</> <r>"{}"</>'.format(
-                options.lldb_executable))
+            raise ToolArgumentError(
+                '<d>could not find</> <r>"{}"</>'.format(options.lldb_executable)
+            )
 
 
 def handle_debugger_tool_options(context, defaults):  # noqa
@@ -137,14 +143,14 @@ def handle_debugger_tool_options(context, defaults):  # noqa
     if options.arch is None:
         options.arch = defaults.arch
     else:
-        if options.debugger != 'lldb':
-            _warn_meaningless_option(context, '--arch')
+        if options.debugger != "lldb":
+            _warn_meaningless_option(context, "--arch")
 
     if options.show_debugger is None:
         options.show_debugger = defaults.show_debugger
     else:
-        if options.debugger == 'lldb':
-            _warn_meaningless_option(context, '--show-debugger')
+        if options.debugger == "lldb":
+            _warn_meaningless_option(context, "--show-debugger")
 
 
 def _get_command_infos(context):
@@ -162,48 +168,56 @@ def empty_debugger_steps(context):
     return DextIR(
         executable_path=context.options.executable,
         source_paths=context.options.source_files,
-        dexter_version=context.version)
+        dexter_version=context.version,
+    )
 
 
 def get_debugger_steps(context):
     step_collection = empty_debugger_steps(context)
 
-    with Timer('parsing commands'):
+    with Timer("parsing commands"):
         try:
             step_collection.commands = _get_command_infos(context)
         except CommandParseError as e:
-            msg = 'parser error: <d>{}({}):</> {}\n{}\n{}\n'.format(
-                e.filename, e.lineno, e.info, e.src, e.caret)
+            msg = "parser error: <d>{}({}):</> {}\n{}\n{}\n".format(
+                e.filename, e.lineno, e.info, e.src, e.caret
+            )
             raise DebuggerException(msg)
 
-    with NamedTemporaryFile(
-            dir=context.working_directory.path, delete=False) as fp:
+    with NamedTemporaryFile(dir=context.working_directory.path, delete=False) as fp:
         pickle.dump(step_collection, fp, protocol=pickle.HIGHEST_PROTOCOL)
         steps_path = fp.name
 
     with NamedTemporaryFile(
-            dir=context.working_directory.path, delete=False, mode='wb') as fp:
+        dir=context.working_directory.path, delete=False, mode="wb"
+    ) as fp:
         pickle.dump(context.options, fp, protocol=pickle.HIGHEST_PROTOCOL)
         options_path = fp.name
 
     dexter_py = sys.argv[0]
     if not os.path.isfile(dexter_py):
-        dexter_py = os.path.join(get_root_directory(), '..', dexter_py)
+        dexter_py = os.path.join(get_root_directory(), "..", dexter_py)
     assert os.path.isfile(dexter_py)
 
     with NamedTemporaryFile(dir=context.working_directory.path) as fp:
         args = [
-            sys.executable, dexter_py, 'run-debugger-internal-', steps_path,
-            options_path, '--working-directory', context.working_directory.path,
-            '--unittest=off', '--indent-timer-level={}'.format(Timer.indent + 2)
+            sys.executable,
+            dexter_py,
+            "run-debugger-internal-",
+            steps_path,
+            options_path,
+            "--working-directory",
+            context.working_directory.path,
+            "--unittest=off",
+            "--indent-timer-level={}".format(Timer.indent + 2),
         ]
         try:
-            with Timer('running external debugger process'):
+            with Timer("running external debugger process"):
                 subprocess.check_call(args)
         except subprocess.CalledProcessError as e:
             raise DebuggerException(e)
 
-    with open(steps_path, 'rb') as fp:
+    with open(steps_path, "rb") as fp:
         step_collection = pickle.load(fp)
 
     return step_collection
@@ -222,9 +236,8 @@ class Debuggers(object):
         self.context = context
 
     def load(self, key, step_collection=None):
-        with Timer('load {}'.format(key)):
-            return Debuggers.potential_debuggers()[key](self.context,
-                                                        step_collection)
+        with Timer("load {}".format(key)):
+            return Debuggers.potential_debuggers()[key](self.context, step_collection)
 
     def _populate_debugger_cache(self):
         debuggers = []
@@ -235,19 +248,19 @@ class Debuggers(object):
                 pass
 
             LoadedDebugger.option_name = key
-            LoadedDebugger.full_name = '[{}]'.format(debugger.name)
+            LoadedDebugger.full_name = "[{}]".format(debugger.name)
             LoadedDebugger.is_available = debugger.is_available
 
             if LoadedDebugger.is_available:
                 try:
                     LoadedDebugger.version = debugger.version.splitlines()
                 except AttributeError:
-                    LoadedDebugger.version = ['']
+                    LoadedDebugger.version = [""]
             else:
                 try:
                     LoadedDebugger.error = debugger.loading_error.splitlines()
                 except AttributeError:
-                    LoadedDebugger.error = ['']
+                    LoadedDebugger.error = [""]
 
                 try:
                     LoadedDebugger.error_trace = debugger.loading_error_trace
@@ -267,29 +280,27 @@ class Debuggers(object):
 
         for d in debuggers:
             # Option name, right padded with spaces for alignment
-            option_name = (
-                '{{name: <{}}}'.format(max_o_len).format(name=d.option_name))
+            option_name = "{{name: <{}}}".format(max_o_len).format(name=d.option_name)
 
             # Full name, right padded with spaces for alignment
-            full_name = ('{{name: <{}}}'.format(max_n_len)
-                         .format(name=d.full_name))
+            full_name = "{{name: <{}}}".format(max_n_len).format(name=d.full_name)
 
             if d.is_available:
-                name = '<b>{} {}</>'.format(option_name, full_name)
+                name = "<b>{} {}</>".format(option_name, full_name)
 
                 # If the debugger is available, show the first line of the
                 #  version info.
-                available = '<g>YES</>'
-                info = '<b>({})</>'.format(d.version[0])
+                available = "<g>YES</>"
+                info = "<b>({})</>".format(d.version[0])
             else:
-                name = '<y>{} {}</>'.format(option_name, full_name)
+                name = "<y>{} {}</>".format(option_name, full_name)
 
                 # If the debugger is not available, show the first line of the
                 # error reason.
-                available = '<r>NO</> '
-                info = '<y>({})</>'.format(d.error[0])
+                available = "<r>NO</> "
+                info = "<y>({})</>".format(d.error[0])
 
-            msg = '{} {} {}'.format(name, available, info)
+            msg = "{} {} {}".format(name, available, info)
 
             if self.context.options.verbose:
                 # If verbose mode and there was more version or error output
@@ -298,16 +309,18 @@ class Debuggers(object):
                 verbose_info = None
                 if d.is_available:
                     if d.version[1:]:
-                        verbose_info = d.version + ['\n']
+                        verbose_info = d.version + ["\n"]
                 else:
                     # Some of list elems may contain multiple lines, so make
                     # sure each elem is a line of its own.
                     verbose_info = d.error_trace
 
                 if verbose_info:
-                    verbose_info = '\n'.join('        {}'.format(l.rstrip())
-                                             for l in verbose_info) + '\n'
-                    msg = '{}\n\n{}'.format(msg, verbose_info)
+                    verbose_info = (
+                        "\n".join("        {}".format(l.rstrip()) for l in verbose_info)
+                        + "\n"
+                    )
+                    msg = "{}\n\n{}".format(msg, verbose_info)
 
             msgs.append(msg)
-        self.context.o.auto('\n{}\n\n'.format('\n'.join(msgs)))
+        self.context.o.auto("\n{}\n\n".format("\n".join(msgs)))

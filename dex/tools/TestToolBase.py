@@ -50,29 +50,35 @@ class TestToolBase(ToolBase):
         add_heuristic_tool_arguments(parser)
 
         parser.add_argument(
-            'tests_directory',
+            "tests_directory",
             type=str,
-            metavar='<tests-directory>',
-            nargs='?',
-            default=os.path.abspath(
-                os.path.join(get_root_directory(), '..', 'tests')),
-            help='directory containing test(s)')
+            metavar="<tests-directory>",
+            nargs="?",
+            default=os.path.abspath(os.path.join(get_root_directory(), "..", "tests")),
+            help="directory containing test(s)",
+        )
 
         parser.add_argument(
-            '--results-directory',
+            "--results-directory",
             type=str,
-            metavar='<directory>',
+            metavar="<directory>",
             default=os.path.abspath(
-                os.path.join(get_root_directory(), '..', 'results',
-                             datetime.now().strftime('%Y-%m-%d-%H%M-%S'))),
-            help='directory to save results')
+                os.path.join(
+                    get_root_directory(),
+                    "..",
+                    "results",
+                    datetime.now().strftime("%Y-%m-%d-%H%M-%S"),
+                )
+            ),
+            help="directory to save results",
+        )
 
     def handle_options(self, defaults):
         options = self.context.options
 
         # We accept either or both of --binary and --builder.
         if not options.binary and not options.builder:
-            raise Error('expected --builder or --binary')
+            raise Error("expected --builder or --binary")
 
         # --binary overrides --builder
         if options.binary:
@@ -81,8 +87,9 @@ class TestToolBase(ToolBase):
 
             options.binary = os.path.abspath(options.binary)
             if not os.path.isfile(options.binary):
-                raise Error('<d>could not find binary file</> <r>"{}"</>'
-                            .format(options.binary))
+                raise Error(
+                    '<d>could not find binary file</> <r>"{}"</>'.format(options.binary)
+                )
         else:
             try:
                 self.build_script = handle_builder_tool_options(self.context)
@@ -98,7 +105,9 @@ class TestToolBase(ToolBase):
         if not os.path.isdir(options.tests_directory):
             raise Error(
                 '<d>could not find tests directory</> <r>"{}"</>'.format(
-                    options.tests_directory))
+                    options.tests_directory
+                )
+            )
 
         options.results_directory = os.path.abspath(options.results_directory)
         if not os.path.isdir(options.results_directory):
@@ -106,16 +115,17 @@ class TestToolBase(ToolBase):
                 os.makedirs(options.results_directory)
             except OSError as e:
                 raise Error(
-                    '<d>could not create directory</> <r>"{}"</> <y>({})</>'.
-                    format(options.results_directory, e.strerror))
+                    '<d>could not create directory</> <r>"{}"</> <y>({})</>'.format(
+                        options.results_directory, e.strerror
+                    )
+                )
 
     def go(self) -> ReturnCode:  # noqa
         options = self.context.options
 
-        subdirs = sorted([
-            r for r, _, f in os.walk(options.tests_directory)
-            if 'test.cfg' in f
-        ])
+        subdirs = sorted(
+            [r for r, _, f in os.walk(options.tests_directory) if "test.cfg" in f]
+        )
 
         for subdir in subdirs:
 
@@ -123,12 +133,13 @@ class TestToolBase(ToolBase):
             # this isn't just limited to C and C++.
             options.source_files = [
                 os.path.normcase(os.path.join(subdir, f))
-                for f in os.listdir(subdir) if any(
-                    f.endswith(ext) for ext in ['.c', '.cpp'])
+                for f in os.listdir(subdir)
+                if any(f.endswith(ext) for ext in [".c", ".cpp"])
             ]
 
             options.executable = os.path.join(
-                self.context.working_directory.path, 'tmp.exe')
+                self.context.working_directory.path, "tmp.exe"
+            )
 
             self._run_test(subdir)
 
@@ -136,15 +147,14 @@ class TestToolBase(ToolBase):
 
     @staticmethod
     def _is_current_directory(test_directory):
-        return test_directory == '.'
+        return test_directory == "."
 
     def _get_test_name(self, test_dir):
         """Get the test name from the sub directory path it's stored in.
         """
         # test names are distinguished by their relative path from the
         # specified root tests directory.
-        test_name = os.path.relpath(test_dir,
-                                    self.context.options.tests_directory)
+        test_name = os.path.relpath(test_dir, self.context.options.tests_directory)
         if self._is_current_directory(test_name):
             test_name = os.path.basename(test_dir)
         return test_name
